@@ -1,0 +1,49 @@
+[
+    {
+        "_id": 1001,
+        "userName": "John Michael",
+        "userImg": "https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg",
+        "review": "A lovely product. Have bought this 6 months ago. It is an absolute top notch product from Microsoft. Highly recommended.",
+        "rating": 4.00
+    },
+
+    {
+        "_id": 1002,
+        "userName": "Ashley Nurse",
+        "userImg": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "review": "I have recently bought XBox Series X and having fun with great gaming experience. If you want to know what real gaming experience is then buy this product asap.",
+        "rating": 4.50
+    },
+
+    {
+        "_id": 1003,
+        "userName": "Joseph Gonzalez",
+        "userImg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "review": "Marvelous product! I am in love with the design and the performance is superb. It's a beast! Highly recommended.",
+        "rating": 4.25
+    },
+
+    {
+        "_id": 1004,
+        "userName": "Hailey Reed",
+        "userImg": "https://images.unsplash.com/photo-1520454125516-134a66d9bf78?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "review": "Great product. Absolutely fabulous. But I am facing some heat issues while gaming. But overall it's a great product.",
+        "rating": 3.75
+    },
+
+    {
+        "_id": 1005,
+        "userName": "Taylor Wright",
+        "userImg": "https://images.unsplash.com/photo-1517630800677-932d836ab680?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "review": "I have been playing with my new XBox Series X for several months. It's giving me a great gaming experience. I don't face any lag or FPS drop. Highly recommended for smooth gaming experience.",
+        "rating": 4.50
+    },
+
+    {
+        "_id": 1006,
+        "userName": "Gwendal Cottin",
+        "userImg": "https://images.unsplash.com/photo-1525873765963-8931ab571545?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "review": "I am using my XBox Series X for 3-4 months as rough as possible as I am a gaming freak. It is absolutely the best product from XBox! It is performing at it's best despite of the rough use. Highly recommended for lag free gaming experience.",
+        "rating": 5.00
+    }
+]

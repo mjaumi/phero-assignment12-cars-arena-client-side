@@ -1,9 +1,41 @@
-import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuoteRight, faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from 'react';
+import Review from '../Review/Review';
 
 const Reviews = () => {
+    // integration of react hooks
+    const [reviews, setReviews] = useState([]);
+
+    useEffect(() => {
+        fetch('reviewData.json')
+            .then(res => res.json())
+            .then(data => setReviews(data));
+    }, []);
+
+    // rendering review components here
     return (
         <section className='my-20 w-[95%] md:w-4/5 mx-auto'>
-            <h2 className='md:text-left text-4xl font-medium text-primary'>Reviews</h2>
+            <div className='flex justify-between'>
+                <div className='hidden md:block'>
+                    <FontAwesomeIcon icon={faQuoteLeft} className='w-32 h-32 text-primary opacity-40' />
+                </div>
+                <div>
+                    <h2 className='text-3xl md:text-4xl text-neutral font-bold mb-3'>What Our Customers Are Saying?</h2>
+                    <p className='text-secondary'>Don't take our words. see what our customers are saying about us & make your own decision.</p>
+                </div>
+                <div className='hidden md:block'>
+                    <FontAwesomeIcon icon={faQuoteRight} className='w-32 h-32 text-primary opacity-40' />
+                </div>
+            </div>
+            <div className='grid grid-cols-1 md:grid-cols-3 mt-10'>
+                {
+                    reviews.map(review => <Review
+                        key={review._id}
+                        reviewData={review}
+                    />)
+                }
+            </div>
         </section>
     );
 };

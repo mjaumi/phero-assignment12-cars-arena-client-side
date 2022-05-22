@@ -23,6 +23,9 @@ module.exports = {
       animation: {
         'bottom-top-fade-in': 'bottom-top-fade-in 1s ease-in-out',
         'fade-in': 'fade-in 1s ease-in-out 1s forwards',
+      },
+      gridTemplateRows: {
+        'arena-card': '80px 1fr',
       }
     },
   },
