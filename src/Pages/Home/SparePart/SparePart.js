@@ -5,6 +5,7 @@ const SparePart = ({ part }) => {
     // destructuring the props
     const { name, img, price, minimumOrderQuantity, availableQuantity, warranty } = part;
 
+    // rendering spare part card component here
     return (
         <div className='px-6 py-8 border border-accent'>
             <div className='w-[90%] mx-auto'>

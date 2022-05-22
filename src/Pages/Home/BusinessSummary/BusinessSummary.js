@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import Summary from '../Summary/Summary';
 
 const BusinessSummary = () => {
+    // integration of react hooks
+    const [summary, setSummary] = useState([]);
+
+    // fetching the summary data
+    useEffect(() => {
+        fetch('summaryData.json')
+            .then(res => res.json())
+            .then(data => setSummary(data));
+    }, []);
+
+    // rendering business summary component here
     return (
-        <section className='my-20 w-[95%] md:w-4/5 mx-auto'>
-            <h2 className='md:text-left text-4xl font-medium text-primary'>Business Summary</h2>
+        <section className='bg-base-200 py-20'>
+            <div className='w-[95%] md:w-4/5 mx-auto'>
+                <h2 className='text-3xl md:text-5xl text-neutral font-bold md:mb-3'>Why Choose Us?</h2>
+                <p className='text-secondary md:text-lg'>Because, we have ...</p>
+                <div className='grid grid-cols-1 md:grid-cols-4 mt-10'>
+                    {
+                        summary.map((sumData, index) => <Summary
+                            key={sumData._id}
+                            index={index}
+                            data={sumData}
+                        />)
+                    }
+                </div>
+            </div>
         </section>
     );
 };
