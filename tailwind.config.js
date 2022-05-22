@@ -6,6 +6,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         'banner-img': "linear-gradient(90deg, rgba(26, 97, 161, 0.8), rgba(229, 21, 21, 0.7)), url('/src/Assets/images/banner.jpg')",
+        'about-first-img': "linear-gradient(90deg, rgba(26, 97, 161, 0.8), rgba(229, 21, 21, 0.7)), url('/src/Assets/images/about-image-1.jpg')",
+        'about-last-img': "linear-gradient(90deg, rgba(26, 97, 161, 0.8), rgba(229, 21, 21, 0.7)), url('/src/Assets/images/about-image-2.jpg')",
       },
       fontFamily: {
         'poppins': ["'Poppins'", 'sans-serif'],

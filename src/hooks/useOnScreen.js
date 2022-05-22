@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// this custom hook triggers checks if the element is in the viewport
 const useOnScreen = ref => {
     // integration of react hooks
     const [isIntersecting, setIntersecting] = useState(false);
