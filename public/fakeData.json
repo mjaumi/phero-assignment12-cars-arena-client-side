@@ -1,0 +1,121 @@
+[
+    {
+        "_id": 1,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    },
+
+    {
+        "_id": 2,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    },
+
+    {
+        "_id": 3,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    },
+
+    {
+        "_id": 4,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    },
+
+    {
+        "_id": 5,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    },
+
+    {
+        "_id": 6,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    },
+
+    {
+        "_id": 7,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    },
+
+    {
+        "_id": 8,
+        "name": "CarsArena Rims",
+        "img": "https://i.ibb.co/B25vw2G/rims.jpg",
+        "minimumOrderQuantity": 100,
+        "availableQuantity": 1000,
+        "price": 50000,
+        "size": 20,
+        "weight": 15.9,
+        "design": "Performance",
+        "technology": "Casting",
+        "description": "A performance legend paired with classic beauty of CarsArena. A technological masterpiece showcased in a timeless CarsArena Design, The best-selling two-piece Rims in the ideal combination of the classic CarsArena multi piece design and the latest performance technology. The feather-light titanium screws are an exotic high-tech flourish for the exclusive rim.",
+        "warranty": 2
+    }
+]
