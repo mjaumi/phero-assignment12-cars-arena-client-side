@@ -23,7 +23,7 @@ const SparePart = ({ part }) => {
                 <p><span className='text-primary text-3xl font-semibold'>৳{price}</span> <small className='font-extralight'>Per Unit</small></p>
             </div>
             <div className='mt-10 w-3/4 mx-auto'>
-                <ArenaButton>Buy Now</ArenaButton>
+                <ArenaButton type={'button'}>Buy Now</ArenaButton>
             </div>
         </div>
     );

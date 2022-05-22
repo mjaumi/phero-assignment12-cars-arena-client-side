@@ -14,7 +14,7 @@ const BusinessSummary = () => {
 
     // rendering business summary component here
     return (
-        <section className='bg-base-200 py-20'>
+        <section className='bg-base-200 py-40'>
             <div className='w-[95%] md:w-4/5 mx-auto'>
                 <h2 className='text-3xl md:text-5xl text-neutral font-bold md:mb-3'>Why Choose Us?</h2>
                 <p className='text-secondary md:text-lg'>Because, we have ...</p>
