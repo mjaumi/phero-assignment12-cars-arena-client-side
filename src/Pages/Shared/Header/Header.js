@@ -5,7 +5,7 @@ const Header = () => {
 
     // rendering header component here
     return (
-        <header className='bg-base-300 py-3 bg-opacity-50'>
+        <header className='bg-base-300 py-3 bg-opacity-70 sticky top-0 -mb-[90px]'>
             <nav className='w-full md:w-4/5 mx-auto'>
                 <div className='navbar'>
                     <div className='navbar-start'>
@@ -21,7 +21,7 @@ const Header = () => {
                                 </div>
                             </ul>
                         </div>
-                        <Link to='/' className='btn btn-ghost normal-case text-lg font-thin'>Car <span className='text-3xl font-bold text-primary'>Arena</span></Link>
+                        <Link to='/' className='btn btn-ghost normal-case text-lg font-extralight'>Car <span className='text-3xl font-bold text-primary'>Arena</span></Link>
                     </div>
                     <div className='navbar-end hidden lg:flex'>
                         <ul className='menu menu-horizontal p-0 mr-5'>
