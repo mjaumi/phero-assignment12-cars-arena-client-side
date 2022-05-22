@@ -5,7 +5,7 @@ const Header = () => {
 
     // rendering header component here
     return (
-        <header className='bg-base-300 py-3 bg-opacity-70 sticky top-0 -mb-[90px]'>
+        <header className='bg-base-300 py-3 bg-opacity-70 sticky top-0 -mb-[90px] z-[99999]'>
             <nav className='w-full md:w-4/5 mx-auto'>
                 <div className='navbar p-0'>
                     <div className='navbar-start'>
