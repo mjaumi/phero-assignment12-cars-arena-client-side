@@ -81,7 +81,14 @@ const Header = () => {
                                 <div onClick={showMenu} className='btn btn-ghost relative flex items-center normal-case'>
                                     <p>{user.displayName}</p>
                                     <div className='ml-3 h-10 w-10 rounded-full overflow-hidden border-2 border-primary'>
-                                        <img src={user.photoURL} alt={user.displayName} />
+                                        {
+                                            user.photoURL ?
+                                                <img src={user.photoURL} alt={user.displayName} />
+                                                :
+                                                <div className='h-full bg-accent'>
+                                                    <FontAwesomeIcon icon={faUserAlt} className='mt-2 h-[90%]' />
+                                                </div>
+                                        }
                                     </div>
                                     <ChevronDownIcon className={`${popoverMenuShow ? 'rotate-0' : 'rotate-90'} text-neutral duration-300 h-5 w-5 ml-2`} />
                                 </div>

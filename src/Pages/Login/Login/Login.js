@@ -1,23 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import ArenaButton from '../../Shared/ArenaButton/ArenaButton';
-import { async } from '@firebase/util';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import { toast } from 'react-toastify';
 
 const Login = () => {
+    // integration of react firebase hooks
+    const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
 
     // integration of react hook form here
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    // integration of react hook
+    const navigate = useNavigate();
 
     //scroll to the top on render
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
+    // event handler for login
     const handleLogin = async (data) => {
+        await signInWithEmailAndPassword(data.email, data.password);
+    }
+
+    if (user) {
+        toast.success('Log In Successful!!!');
+        navigate('/');
+    }
+
+    if (loading) {
 
     }
 
@@ -78,6 +93,7 @@ const Login = () => {
                     </form>
                     <div>
                         <p className='text-neutral text-sm'>Not a member yet? <Link className='text-primary underline hover:opacity-60 duration-300' to='/signup'>Register Now!</Link></p>
+                        <p className='mt-2 text-warning text-sm'>{error && error.message}</p>
                     </div>
                     <SocialLogin />
                 </div>
