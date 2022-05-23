@@ -1,17 +1,19 @@
 import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import ArenaButton from '../../Shared/ArenaButton/ArenaButton';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Signup = () => {
     // integration of react firebase hook here
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
+    const [sendEmailVerification, sending, verifyError] = useSendEmailVerification(auth);
 
     //integration of react hooks here
     const [passwordMatchError, setPasswordMatchError] = useState('');
@@ -30,9 +32,10 @@ const Signup = () => {
         if (data.password === data.confirmPassword) {
             await createUserWithEmailAndPassword(data.email, data.password);
             await updateProfile({ displayName: data.name });
+            await sendEmailVerification();
 
             if (!error || !updatingError || user) {
-                toast.success('Account Creation Successful!!! Now Login.');
+                toast.success('Account Creation Successful!!! Please, Check Your Email.');
                 signOut(auth);
                 navigate('/');
             }
@@ -41,13 +44,14 @@ const Signup = () => {
         }
     }
 
-    if (loading || updating) {
+    if (loading || updating || sending) {
 
     }
 
     // rendering signup component here
     return (
         <section className='relative min-h-[90vh] flex items-center justify-center'>
+            <PageTitle title={'Sign Up'} />
             <div className='w-[90%] md:w-1/3 mb-20 mt-40'>
                 <div className='w-full bg-base-200 border border-accent py-5 px-5 md:px-14'>
                     <div className='text-left mb-8'>
@@ -127,7 +131,7 @@ const Signup = () => {
                             </label>
                         </div>
                         <div>
-                            <p className='text-warning'>{passwordMatchError}</p>
+                            <p className='text-warning'>{passwordMatchError || verifyError?.message || updatingError?.message || error?.message}</p>
                         </div>
                         <div className='mt-10'>
                             <ArenaButton type={'submit'}>Sign Up</ArenaButton>

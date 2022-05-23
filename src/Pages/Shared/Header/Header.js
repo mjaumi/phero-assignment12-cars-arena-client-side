@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ const Header = () => {
 
     // integration of react hooks
     const [popoverMenuShow, setPopoverMenuShow] = useState(false);
+    const location = useLocation();
 
     // showing header popover menu
     const showMenu = () => {
@@ -23,6 +24,7 @@ const Header = () => {
     // event handler for log out
     const handleSignOut = async () => {
         await signOut(auth);
+        setPopoverMenuShow(false);
         toast.success('Log Out Successful!!!');
     }
 
@@ -42,7 +44,7 @@ const Header = () => {
                                     <li><Link to='/blogs'>Blogs</Link></li>
                                     <li><Link to='/myPortfolio'>My Portfolio</Link></li>
                                     {
-                                        user ? <>
+                                        (user && !location.pathname === '/signup') ? <>
                                             <div onClick={showMenu} className='btn btn-ghost relative flex items-center normal-case'>
                                                 <p>{user.displayName}</p>
                                                 <div className='ml-3 h-10 w-10 rounded-full overflow-hidden border-2 border-primary'>
@@ -77,7 +79,7 @@ const Header = () => {
                             <li><Link to='/myPortfolio'>My Portfolio</Link></li>
                         </ul>
                         {
-                            user ? <>
+                            (user && location.pathname !== '/signup') ? <>
                                 <div onClick={showMenu} className='btn btn-ghost relative flex items-center normal-case'>
                                     <p>{user.displayName}</p>
                                     <div className='ml-3 h-10 w-10 rounded-full overflow-hidden border-2 border-primary'>
