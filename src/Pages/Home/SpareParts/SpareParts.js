@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import SparePart from '../SparePart/SparePart';
 
@@ -5,10 +6,13 @@ const SpareParts = () => {
     // integration of react hooks here
     const [parts, setParts] = useState([]);
 
+    // fetching first 6 parts here
     useEffect(() => {
-        fetch('fakeData.json')
-            .then(res => res.json())
-            .then(data => setParts(data));
+        const getFirstSixParts = async () => {
+            const { data } = await axios.get('https://shielded-mountain-18545.herokuapp.com/parts');
+            setParts(data);
+        }
+        getFirstSixParts();
     }, []);
 
 
