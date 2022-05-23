@@ -5,6 +5,7 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import ArenaButton from '../../Shared/ArenaButton/ArenaButton';
 import { async } from '@firebase/util';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Login = () => {
 
@@ -73,9 +74,12 @@ const Login = () => {
                         </div>
                         <div className='mt-10'>
                             <ArenaButton type={'submit'}>Log In</ArenaButton>
-                            <p className='text-neutral text-sm'>Not a member yet? <Link className='text-primary underline hover:opacity-60 duration-300' to='/signup'>Register Now!</Link></p>
                         </div>
                     </form>
+                    <div>
+                        <p className='text-neutral text-sm'>Not a member yet? <Link className='text-primary underline hover:opacity-60 duration-300' to='/signup'>Register Now!</Link></p>
+                    </div>
+                    <SocialLogin />
                 </div>
             </div>
         </section>

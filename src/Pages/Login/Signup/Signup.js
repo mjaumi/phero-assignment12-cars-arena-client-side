@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import ArenaButton from '../../Shared/ArenaButton/ArenaButton';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Signup = () => {
     // integration of react firebase hook here
@@ -133,6 +134,7 @@ const Signup = () => {
                             <p className='text-neutral text-sm'>Already have an account? <Link className='text-primary underline hover:opacity-60 duration-300' to='/login'>Login Now!</Link></p>
                         </div>
                     </form>
+                    <SocialLogin />
                 </div>
             </div>
         </section>

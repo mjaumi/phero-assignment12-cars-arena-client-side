@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ChevronDownIcon } from '@heroicons/react/outline';
 
 const Dropdown = ({ dropDownOnClick, dropDownRef, dropdownName, dropdownDefaultValue, dropdownMenu }) => {
-    // dropdown props
+    // integration of react hooks
     const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
     const [dropdownValue, setDropdownValue] = useState(dropdownDefaultValue);
 
