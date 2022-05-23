@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ChevronDownIcon } from '@heroicons/react/outline';
 
-const Dropdown = ({ dropdownName, dropdownDefaultValue, dropdownMenu }) => {
+const Dropdown = ({ dropDownOnClick, dropDownRef, dropdownName, dropdownDefaultValue, dropdownMenu }) => {
     // dropdown props
     const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
     const [dropdownValue, setDropdownValue] = useState(dropdownDefaultValue);
@@ -12,7 +12,7 @@ const Dropdown = ({ dropdownName, dropdownDefaultValue, dropdownMenu }) => {
             <div className="w-full">
                 <div className="relative inline-flex align-middle w-full">
                     <div className="relative flex w-full flex-wrap items-stretch cursor-pointer">
-                        <input type="text" name={dropdownName} value={dropdownValue} className='input input-bordered input-secondary rounded-none w-full text-neutral cursor-pointer' onClick={() => setDropdownPopoverShow(!dropdownPopoverShow)} readOnly />
+                        <input ref={dropDownRef} type="text" name={dropdownName} value={dropdownValue} className='input input-bordered input-secondary rounded-none w-full text-neutral cursor-pointer' onClick={() => setDropdownPopoverShow(!dropdownPopoverShow)} readOnly />
                         <span className="z-10 h-full leading-snug font-normal absolute text-center bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
                             <ChevronDownIcon className={`${dropdownPopoverShow ? 'rotate-90' : 'rotate-0'} text-neutral duration-300`} />
                         </span>
@@ -32,6 +32,7 @@ const Dropdown = ({ dropdownName, dropdownDefaultValue, dropdownMenu }) => {
                                     e.preventDefault();
                                     setDropdownValue(item);
                                     setDropdownPopoverShow(!dropdownPopoverShow);
+                                    dropDownOnClick(item);
                                 }}
                             >
                                 {item}
