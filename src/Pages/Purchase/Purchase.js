@@ -18,7 +18,7 @@ const Purchase = () => {
 
     //scroll to the top on render
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
     }, []);
 
     // fetching individual part
