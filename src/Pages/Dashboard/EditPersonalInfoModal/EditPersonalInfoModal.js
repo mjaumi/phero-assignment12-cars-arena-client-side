@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 
-const EditPersonalInfoModal = ({ refetch, user, setShowEditInfoModal }) => {
+const EditPersonalInfoModal = ({ refetch, user, userInfo, setShowEditInfoModal }) => {
     // integration of react firebase hook
     const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
 
@@ -32,14 +32,14 @@ const EditPersonalInfoModal = ({ refetch, user, setShowEditInfoModal }) => {
             toast.error('Please, fill at least one field!!!');
         } else {
             const updatedUser = {
-                education: data.education,
-                city: data.city,
-                phone: data.phone,
-                linkedIn: data.linkedIn,
-                address: data.address
+                education: data.education ? data.education : userInfo.education,
+                city: data.city ? data.city : userInfo.city,
+                phone: data.phone ? data.phone : userInfo.phone,
+                linkedIn: data.linkedIn ? data.linkedIn : userInfo.linkedIn,
+                address: data.address ? data.address : userInfo.address
             }
 
-            const infoUpdateUrl = `http://localhost:5000/user?email=${user?.email}`;
+            const infoUpdateUrl = `https://shielded-mountain-18545.herokuapp.com/user?email=${user?.email}`;
 
             const result = await axios.patch(infoUpdateUrl, updatedUser);
 

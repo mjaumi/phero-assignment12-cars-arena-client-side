@@ -16,7 +16,7 @@ const MyProfile = () => {
     const [showEditInfoModal, setShowEditInfoModal] = useState(false);
 
     // integration of react query
-    const url = `http://localhost:5000/user?email=${user?.email}`;
+    const url = `https://shielded-mountain-18545.herokuapp.com/user?email=${user?.email}`;
     const { data: userInfo, isLoading, refetch } = useQuery('userInfo', () => axios.get(url));
 
     //scroll to the top on render
@@ -94,6 +94,7 @@ const MyProfile = () => {
                 showEditInfoModal && <EditPersonalInfoModal
                     refetch={refetch}
                     user={user}
+                    userInfo={userInfo.data}
                     setShowEditInfoModal={setShowEditInfoModal}
                 />
             }
