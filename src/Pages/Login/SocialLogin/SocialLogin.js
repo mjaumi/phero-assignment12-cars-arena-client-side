@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SocialLogin = () => {
     // integration of react firebase hooks
@@ -16,15 +17,33 @@ const SocialLogin = () => {
     // event handler for log in with google
     const handleLoginWithGoogle = async () => {
         await signInWithGoogle();
+    }
 
-        if (!error) {
-            toast.success('Log In Successful!!!');
+    // creating new user credentials in the database
+    useEffect(() => {
+        const createNewUserCredentials = async () => {
+            if (user) {
+                if (user.user.metadata.creationTime === user.user.metadata.lastSignInTime) {
+
+                    const newUser = {
+                        email: user.user.email,
+                        role: 'user',
+                        education: '',
+                        phone: '',
+                        city: '',
+                        linkedIn: '',
+                        address: ''
+                    }
+
+                    await axios.post('https://shielded-mountain-18545.herokuapp.com/user', newUser);
+                }
+
+                toast.success('Log In Successful!!!');
+                navigate('/');
+            }
         }
-    }
-
-    if (user) {
-        navigate('/');
-    }
+        createNewUserCredentials();
+    }, [navigate, user]);
 
     if (loading) {
 

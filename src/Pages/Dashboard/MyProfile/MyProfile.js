@@ -24,14 +24,6 @@ const MyProfile = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    /* useEffect(() => {
-        const getUserInfo = async () => {
-            
-            const { data } = await axios.get(url);
-        }
-        getUserInfo();
-    }, [user?.email]); */
-
     if (isLoading) {
         return <p>Loading</p>;
     }
