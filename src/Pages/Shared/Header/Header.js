@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ const Header = () => {
 
     // integration of react hooks
     const [popoverMenuShow, setPopoverMenuShow] = useState(false);
+    const navigate = useNavigate();
     const location = useLocation();
 
     // showing header popover menu
@@ -48,13 +49,20 @@ const Header = () => {
                                             <div onClick={showMenu} className='btn btn-ghost relative flex items-center normal-case'>
                                                 <p>{user.displayName}</p>
                                                 <div className='ml-3 h-10 w-10 rounded-full overflow-hidden border-2 border-primary'>
-                                                    <img src={user.photoURL} alt={user.displayName} />
+                                                    {
+                                                        user.photoURL ?
+                                                            <img src={user.photoURL} alt={user.displayName} />
+                                                            :
+                                                            <div className='h-full bg-accent'>
+                                                                <FontAwesomeIcon icon={faUserAlt} className='mt-2 h-[90%]' />
+                                                            </div>
+                                                    }
                                                 </div>
                                                 <ChevronDownIcon className={`${popoverMenuShow ? 'rotate-0' : 'rotate-90'} text-neutral duration-300 h-5 w-5 ml-2`} />
                                             </div>
                                             <div className={`${popoverMenuShow ? 'scale-y-100' : 'scale-y-0'} bg-base-200 z-50 text-neutral origin-top duration-300 absolute top-full w-[160px]`}
                                             >
-                                                <button className={`${popoverMenuShow ? 'scale-y-100' : 'scale-y-0'} text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-secondary hover:font-bold duration-300 origin-top`}>
+                                                <button onClick={() => navigate('/dashboard')} className={`${popoverMenuShow ? 'scale-y-100' : 'scale-y-0'} text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-secondary hover:font-bold duration-300 origin-top`}>
                                                     <FontAwesomeIcon icon={faUserAlt} className='mr-2' />
                                                     Dashboard
                                                 </button>
@@ -96,7 +104,7 @@ const Header = () => {
                                 </div>
                                 <div className={`${popoverMenuShow ? 'scale-y-100' : 'scale-y-0'} bg-base-200 z-50 text-neutral origin-top duration-300 absolute top-full w-[160px]`}
                                 >
-                                    <button className={`${popoverMenuShow ? 'scale-y-100' : 'scale-y-0'} text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-secondary hover:font-bold duration-300 origin-top`}>
+                                    <button onClick={() => navigate('/dashboard')} className={`${popoverMenuShow ? 'scale-y-100' : 'scale-y-0'} text-sm py-2 px-4 font-normal block w-full whitespace-nowrap hover:bg-secondary hover:font-bold duration-300 origin-top`}>
                                         <FontAwesomeIcon icon={faUserAlt} className='mr-2' />
                                         Dashboard
                                     </button>
