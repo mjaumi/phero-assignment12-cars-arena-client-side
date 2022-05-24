@@ -51,7 +51,6 @@ const ForgotPasswordModal = ({ setShowModal }) => {
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ const Dashboard = () => {
         <section className='pt-20'>
             <div className='drawer drawer-mobile h-fit'>
                 <input id='dashboard-drawer' type='checkbox' className='drawer-toggle' />
-                <div className='drawer-content mt-10 bg-base-100'>
+                <div className='drawer-content pt-10 bg-base-100'>
                     <Outlet />
                     <label htmlFor='dashboard-drawer' className='btn btn-primary drawer-button lg:hidden'>Open drawer</label>
                 </div>

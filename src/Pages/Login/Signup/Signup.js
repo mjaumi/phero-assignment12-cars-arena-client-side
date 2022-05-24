@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
@@ -36,6 +37,19 @@ const Signup = () => {
 
             if (!error || !updatingError || user) {
                 toast.success('Account Creation Successful!!! Please, Check Your Email.');
+
+                const newUser = {
+                    email: data.email,
+                    role: 'user',
+                    education: '',
+                    phone: '',
+                    city: '',
+                    linkedIn: '',
+                    address: ''
+                }
+
+                await axios.post('https://shielded-mountain-18545.herokuapp.com/user', newUser);
+
                 signOut(auth);
                 navigate('/');
             }

@@ -7,7 +7,7 @@ import ArenaButton from '../../Shared/ArenaButton/ArenaButton';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { toast } from 'react-toastify';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
-import ForgotPasswordModal from '../../Shared/ForgotPasswordModal/ForgotPasswordModal';
+import ForgotPasswordModal from '../ForgotPasswordModal/ForgotPasswordModal';
 
 const Login = () => {
     // integration of react firebase hooks
