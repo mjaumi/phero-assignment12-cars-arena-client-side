@@ -1,11 +1,17 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { toast } from 'react-toastify';
+import auth from '../../firebase.init';
 import ArenaButton from '../Shared/ArenaButton/ArenaButton';
 import Dropdown from '../Shared/Dropdown/Dropdown';
 import PageTitle from '../Shared/PageTitle/PageTitle';
 
 const Purchase = () => {
+    // integration of react firebase hooks
+    const [user] = useAuthState(auth);
+
     // integration of react hooks
     const [part, setPart] = useState({});
     const [orderQuantity, setOrderQuantity] = useState(0);
@@ -46,6 +52,41 @@ const Purchase = () => {
             setDisableMinusButton(false);
             setDisablePlusButton(false);
         }
+    }
+
+    // event handler for confirming orders
+    const handleConfirmOrder = async (event) => {
+        event.preventDefault();
+
+        const email = event.target.email.value;
+        const name = event.target.name.value;
+        const phone = event.target.phone.value;
+        const orderedQuantity = parseInt(event.target.orderedQuantity.value.split(' ')[0]);
+        const totalPrice = parseInt(event.target.totalPrice.value.split(' ')[1]);
+        const address = event.target.address.value;
+
+        const newOrder = {
+            email: email,
+            productId: part._id,
+            productName: part.name,
+            name: name,
+            phone: phone,
+            orderedQuantity: orderedQuantity,
+            totalPrice: totalPrice,
+            address: address,
+            status: 'unpaid',
+            tId: ''
+        }
+
+        const { data } = await axios.post(' https://shielded-mountain-18545.herokuapp.com/order', newOrder);
+
+        if (data.insertedId) {
+            toast.success('Placed Order Successfully!!!');
+        } else {
+            toast.error('Failed To Place The Order!!!');
+        }
+
+        event.target.reset();
     }
 
     // handling alter order quantity
@@ -157,25 +198,25 @@ const Purchase = () => {
                     <p className='text-secondary'>Please, fill up the following form in order to confirm the order.</p>
                 </div>
                 <div className='mt-10 w-[95%] md:w-[70%] mx-auto'>
-                    <form >
+                    <form onSubmit={handleConfirmOrder}>
                         <div className='form-control w-full'>
                             <label className='label'>
                                 <span className="label-text after:content-['*'] after:text-primary">Email</span>
                             </label>
-                            <input type='email' placeholder='Enter Your Email' className='input input-bordered input-secondary rounded-none w-full text-neutral' required autoComplete='off' />
+                            <input type='email' name='email' placeholder='Enter Your Email' className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly value={user ? user.email : ''} />
                         </div>
                         <div className='flex flex-col md:flex-row mt-5'>
                             <div className='form-control w-full'>
                                 <label className='label'>
                                     <span className="label-text after:content-['*'] after:text-primary">Name</span>
                                 </label>
-                                <input type='text' placeholder='Enter Your Name' className='input input-bordered input-secondary rounded-none w-full text-neutral' required autoComplete='off' />
+                                <input type='text' name='name' placeholder='Enter Your Name' className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly value={user ? user.displayName : ''} />
                             </div>
                             <div className='form-control w-full mt-5 md:mt-0 md:ml-10'>
                                 <label className='label'>
                                     <span className="label-text after:content-['*'] after:text-primary">Phone Number</span>
                                 </label>
-                                <input type='number' placeholder='Enter Your Phone Number' className='input input-bordered input-secondary rounded-none w-full text-neutral' required autoComplete='off' />
+                                <input type='number' name='phone' placeholder='Enter Your Phone Number' className='input input-bordered input-secondary rounded-none w-full text-neutral' required />
                             </div>
                         </div>
                         <div className='flex flex-col md:flex-row mt-5'>
@@ -183,20 +224,20 @@ const Purchase = () => {
                                 <label className='label'>
                                     <span className="label-text after:content-['*'] after:text-primary">Ordered Quantity</span>
                                 </label>
-                                <input type='text' placeholder='Enter Your Ordered Quantity' value={`${orderQuantity || ''} Units`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
+                                <input type='text' name='orderedQuantity' placeholder='Enter Your Ordered Quantity' value={`${orderQuantity || ''} Units`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
                             </div>
                             <div className='form-control w-full mt-5 md:mt-0 md:ml-10'>
                                 <label className='label'>
                                     <span className="label-text after:content-['*'] after:text-primary">Total Price</span>
                                 </label>
-                                <input type='text' placeholder='Total Price' value={`৳ ${totalPrice || ''}`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
+                                <input type='text' name='totalPrice' placeholder='Total Price' value={`৳ ${totalPrice || ''}`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
                             </div>
                         </div>
                         <div className='form-control mt-5'>
                             <label className='label'>
                                 <span className="label-text after:content-['*'] after:text-primary">Address</span>
                             </label>
-                            <textarea className='textarea textarea-bordered textarea-secondary rounded-none h-24 text-neutral' placeholder='Type Your Address Here...' required autoComplete='off'></textarea>
+                            <textarea name='address' className='textarea textarea-bordered textarea-secondary rounded-none h-24 text-neutral' placeholder='Type Your Address Here...' required></textarea>
                         </div>
                         <div className='mt-8 md:w-3/12 mx-auto'>
                             <ArenaButton type={'submit'}>Confirm Order</ArenaButton>
