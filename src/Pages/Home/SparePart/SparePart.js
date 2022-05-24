@@ -30,7 +30,7 @@ const SparePart = ({ part }) => {
                     <p className='mt-2'><span className='text-lg font-extralight'>Warranty: </span><span className='text-neutral text-lg font-semibold'>{warranty}</span> <small className='font-extralight'>Years</small></p>
                 </div>
                 <div className='my-4'>
-                    <p><span className='text-primary text-3xl font-semibold'>৳{price}</span> <small className='font-extralight'>Per Unit</small></p>
+                    <p><span className='text-primary text-3xl font-semibold'>${price}</span> <small className='font-extralight'>Per Unit</small></p>
                 </div>
                 <div className='mt-10 w-3/4 mx-auto'>
                     <ArenaButton clickHandler={() => handleGotoPurchasePage(_id)} type={'button'}>Buy Now</ArenaButton>

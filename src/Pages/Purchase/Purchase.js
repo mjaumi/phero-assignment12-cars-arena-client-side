@@ -160,7 +160,7 @@ const Purchase = () => {
                         </div>
                     </div>
                     <div className='mt-8'>
-                        <h2 className='font-extralight'><span className='text-4xl text-primary font-bold'>৳{part.price}</span>/Unit</h2>
+                        <h2 className='font-extralight'><span className='text-4xl text-primary font-bold'>${part.price}</span>/Unit</h2>
                     </div>
                     <div className='mt-10'>
                         <h4 className='text-3xl font-semibold'>Order Product</h4>
@@ -230,7 +230,7 @@ const Purchase = () => {
                                 <label className='label'>
                                     <span className="label-text after:content-['*'] after:text-primary">Total Price</span>
                                 </label>
-                                <input type='text' name='totalPrice' placeholder='Total Price' value={`৳ ${totalPrice || ''}`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
+                                <input type='text' name='totalPrice' placeholder='Total Price' value={`$ ${totalPrice || ''}`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
                             </div>
                         </div>
                         <div className='form-control mt-5'>
