@@ -1,10 +1,9 @@
 import { faUserAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useQuery } from 'react-query';
 import auth from '../../../firebase.init';
+import useUserInfo from '../../../hooks/useUserInfo';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import EditPersonalInfoModal from '../EditPersonalInfoModal/EditPersonalInfoModal';
 
@@ -15,9 +14,8 @@ const MyProfile = () => {
     // integration of react hooks
     const [showEditInfoModal, setShowEditInfoModal] = useState(false);
 
-    // integration of react query
-    const url = `https://shielded-mountain-18545.herokuapp.com/user?email=${user?.email}`;
-    const { data: userInfo, isLoading, refetch } = useQuery('userInfo', () => axios.get(url));
+    // integration of custom hooks
+    const [userInfo, isLoading, refetch] = useUserInfo(user);
 
     //scroll to the top on render
     useEffect(() => {
