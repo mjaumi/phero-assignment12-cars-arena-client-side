@@ -27,7 +27,7 @@ module.exports = {
         'fade-in': 'fade-in 1s ease-in-out 1s forwards',
       },
       gridTemplateRows: {
-        'arena-card': '80px 1fr',
+        'arena-card': '100px 1.2fr',
         'arena-parts-card': '1fr 1.7fr',
         'arena-parts-card-inner': '100px 150px 50px 50px',
       }

@@ -16,11 +16,11 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
     // destructuring the props
     const { _id, email, name, orderedQuantity, totalPrice } = order;
 
+    // making the payment
     useEffect(() => {
         const getClientSecretKey = async () => {
             if (totalPrice) {
                 const { data } = await axios.post('https://shielded-mountain-18545.herokuapp.com/create-payment-intent', { price: totalPrice });
-
                 setClientSecret(data);
             }
         }

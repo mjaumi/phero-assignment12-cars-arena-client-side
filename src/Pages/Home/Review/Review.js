@@ -6,7 +6,7 @@ import Rating from 'react-rating';
 
 const Review = ({ reviewData }) => {
     // destructuring the props
-    const { userName, userImg, review, rating } = reviewData;
+    const { userName, userImg, review, rating, date } = reviewData;
 
     // rendering review card component here
     return (
@@ -26,13 +26,14 @@ const Review = ({ reviewData }) => {
                             readonly />
                         <span className='inline-block ml-2 text-neutral'>{rating}<small className='text-primary'>/5.00</small></span>
                     </p>
+                    <p><small>{date}</small></p>
                 </div>
             </div>
             <div className='mt-5 w-[95%] mx-auto relative'>
                 <span className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-                    <FontAwesomeIcon icon={faQuoteRight} className='w-44 h-44 text-primary opacity-25' />
+                    <FontAwesomeIcon icon={faQuoteRight} className='w-36 h-36 text-primary opacity-25' />
                 </span>
-                <p>{review}</p>
+                <p className='text-neutral'>{review}</p>
             </div>
         </div>
     );

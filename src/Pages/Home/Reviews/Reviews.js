@@ -2,15 +2,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuoteRight, faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import Review from '../Review/Review';
+import axios from 'axios';
 
 const Reviews = () => {
     // integration of react hooks
     const [reviews, setReviews] = useState([]);
 
+    // getting all the reviews from database
     useEffect(() => {
-        fetch('reviewData.json')
-            .then(res => res.json())
-            .then(data => setReviews(data));
+        const getReviews = async () => {
+            const { data } = await axios.get('https://shielded-mountain-18545.herokuapp.com/reviews');
+            setReviews(data);
+        }
+        getReviews();
     }, []);
 
     // rendering review components here
