@@ -6,7 +6,7 @@ import ProductRow from '../ProductRow/ProductRow';
 
 const ManageProducts = () => {
     // integration of react query
-    const { data: allParts, isLoading, refetch } = useQuery('allParts', () => axios.get('http://localhost:5000/parts'));
+    const { data: allParts, isLoading, refetch } = useQuery('allParts', () => axios.get('https://shielded-mountain-18545.herokuapp.com/parts'));
 
     if (isLoading) {
         return <p>Loading</p>;

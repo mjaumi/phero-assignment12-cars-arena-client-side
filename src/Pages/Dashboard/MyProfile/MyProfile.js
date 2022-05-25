@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import useUserInfo from '../../../hooks/useUserInfo';
+import Loading from '../../Shared/Loading/Loading';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import EditPersonalInfoModal from '../EditPersonalInfoModal/EditPersonalInfoModal';
 
@@ -23,7 +24,11 @@ const MyProfile = () => {
     }, []);
 
     if (isLoading) {
-        return <p>Loading</p>;
+        return (
+            <div className='h-screen flex justify-center items-center'>
+                <Loading />
+            </div>
+        );
     }
 
     // rendering my profile component here

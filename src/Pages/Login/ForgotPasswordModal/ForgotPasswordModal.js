@@ -9,6 +9,7 @@ const ForgotPasswordModal = ({ setShowModal }) => {
     // integration of react firebase hooks
     const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
 
+    // event handler for password reset
     const handleResetPasswordEmailSend = async (event) => {
         event.preventDefault();
         setShowModal(false);

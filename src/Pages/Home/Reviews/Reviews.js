@@ -3,6 +3,7 @@ import { faQuoteRight, faQuoteLeft } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import Review from '../Review/Review';
 import axios from 'axios';
+import Loading from '../../Shared/Loading/Loading';
 
 const Reviews = () => {
     // integration of react hooks
@@ -32,14 +33,21 @@ const Reviews = () => {
                     <FontAwesomeIcon icon={faQuoteRight} className='w-32 h-32 text-primary opacity-40' />
                 </div>
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-3 mt-10'>
-                {
-                    reviews.map(review => <Review
-                        key={review._id}
-                        reviewData={review}
-                    />)
-                }
-            </div>
+            {
+                reviews.length === 0 ?
+                    <div className='h-[20vh] flex justify-center items-center'>
+                        <Loading />
+                    </div>
+                    :
+                    <div className='grid grid-cols-1 md:grid-cols-3 mt-10'>
+                        {
+                            reviews.map(review => <Review
+                                key={review._id}
+                                reviewData={review}
+                            />)
+                        }
+                    </div>
+            }
         </section>
     );
 };

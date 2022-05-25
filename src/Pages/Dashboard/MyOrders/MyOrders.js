@@ -9,6 +9,7 @@ import OrderRow from '../OrderRow/OrderRow';
 import CheckoutModal from '../CheckoutModal/CheckoutModal';
 import { Elements } from '@stripe/react-stripe-js';
 import OrderDeleteModal from '../OrderDeleteModal/OrderDeleteModal';
+import Loading from '../../Shared/Loading/Loading';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
@@ -26,7 +27,11 @@ const MyOrders = () => {
     const { data: userOrders, isLoading, refetch } = useQuery('userOrders', () => axios.get(url));
 
     if (isLoading) {
-        return <p>Loading</p>;
+        return (
+            <div className='h-screen flex justify-center items-center'>
+                <Loading />
+            </div>
+        );
     }
 
     // getting selected order that the user wants to pay

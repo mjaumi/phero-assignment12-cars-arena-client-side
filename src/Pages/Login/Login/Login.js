@@ -8,6 +8,8 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import { toast } from 'react-toastify';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import ForgotPasswordModal from '../ForgotPasswordModal/ForgotPasswordModal';
+import Loading from '../../Shared/Loading/Loading';
+import axios from 'axios';
 
 const Login = () => {
     // integration of react firebase hooks
@@ -28,6 +30,10 @@ const Login = () => {
     // event handler for login
     const handleLogin = async (data) => {
         await signInWithEmailAndPassword(data.email, data.password);
+
+        // getting token from API
+        const result = await axios.post('http://localhost:5000/getToken', { email: data.email });
+        localStorage.setItem('accessToken', result.data.accessToken);
     }
 
     if (user) {
@@ -35,13 +41,9 @@ const Login = () => {
         navigate('/');
     }
 
-    if (loading) {
-
-    }
-
     // rendering login component here
     return (
-        <section className='relative min-h-[90vh]'>
+        <section className='relative min-h-[90vh] overflow-hidden'>
             <div className=' flex items-center justify-center'>
                 <PageTitle title={'Log In'} />
                 <div className='w-[90%] md:w-1/3 mb-20 mt-40'>
@@ -106,6 +108,14 @@ const Login = () => {
             </div>
             {
                 showModal && <ForgotPasswordModal setShowModal={setShowModal} />
+            }
+            {
+                loading &&
+                <div className='h-screen w-screen absolute top-0 left-0 z-[999999] bg-base-300/50'>
+                    <div className='h-full flex items-center justify-center'>
+                        <Loading />
+                    </div>
+                </div>
             }
         </section>
     );

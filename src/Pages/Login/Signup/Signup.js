@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import ArenaButton from '../../Shared/ArenaButton/ArenaButton';
+import Loading from '../../Shared/Loading/Loading';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
@@ -35,7 +36,7 @@ const Signup = () => {
             await updateProfile({ displayName: data.name });
             await sendEmailVerification();
 
-            if (!error || !updatingError || user) {
+            if ((!error || !updatingError || !verifyError) && user) {
                 toast.success('Account Creation Successful!!! Please, Check Your Email.');
 
                 const newUser = {
@@ -58,13 +59,9 @@ const Signup = () => {
         }
     }
 
-    if (loading || updating || sending) {
-
-    }
-
     // rendering signup component here
     return (
-        <section className='relative min-h-[90vh] flex items-center justify-center'>
+        <section className='relative min-h-[90vh] flex items-center justify-center overflow-hidden'>
             <PageTitle title={'Sign Up'} />
             <div className='w-[90%] md:w-1/3 mb-20 mt-40'>
                 <div className='w-full bg-base-200 border border-accent py-5 px-5 md:px-14'>
@@ -155,6 +152,14 @@ const Signup = () => {
                     <SocialLogin />
                 </div>
             </div>
+            {
+                (loading || updating || sending) &&
+                <div className='h-screen w-screen absolute top-0 left-0 z-[999999] bg-base-300/50'>
+                    <div className='h-full flex items-center justify-center'>
+                        <Loading />
+                    </div>
+                </div>
+            }
         </section>
     );
 };

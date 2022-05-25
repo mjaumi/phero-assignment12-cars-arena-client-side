@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import useUserInfo from '../../../hooks/useUserInfo';
+import Loading from '../../Shared/Loading/Loading';
 
 const Dashboard = () => {
     // integration of react firebase hooks
@@ -12,7 +13,11 @@ const Dashboard = () => {
     const [userInfo, isLoading] = useUserInfo(user);
 
     if (loading || isLoading) {
-        return <p>Loading...</p>;
+        return (
+            <div className='h-screen flex justify-center items-center'>
+                <Loading />
+            </div>
+        );
     }
 
     // rendering dashboard component here
@@ -39,8 +44,8 @@ const Dashboard = () => {
                             userInfo.data.role === 'admin' &&
                             <>
                                 <li><Link to='/dashboard/manageProducts'>Manage Products</Link></li>
+                                <li><Link to='/dashboard/addProduct'>Add A Product</Link></li>
                                 <li><Link to='/dashboard/mangeOrders'>Manage All Orders</Link></li>
-                                <li><Link to='/dashboard/addProduct'>Manage A Product</Link></li>
                                 <li><Link to='/dashboard/makeAdmin'>Make Admin</Link></li>
                             </>
                         }

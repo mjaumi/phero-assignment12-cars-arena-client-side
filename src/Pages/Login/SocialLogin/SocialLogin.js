@@ -6,6 +6,7 @@ import auth from '../../../firebase.init';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Loading from '../../Shared/Loading/Loading';
 
 const SocialLogin = () => {
     // integration of react firebase hooks
@@ -38,16 +39,16 @@ const SocialLogin = () => {
                     await axios.post('https://shielded-mountain-18545.herokuapp.com/user', newUser);
                 }
 
+                // getting token from API
+                const result = await axios.post('http://localhost:5000/getToken', { email: user.user.email });
+                localStorage.setItem('accessToken', result.data.accessToken);
+
                 toast.success('Log In Successful!!!');
                 navigate('/');
             }
         }
         createNewUserCredentials();
     }, [navigate, user]);
-
-    if (loading) {
-
-    }
 
     // rendering social login component here
     return (
@@ -58,6 +59,14 @@ const SocialLogin = () => {
                 Log In With Google
             </button>
             <p className='mt-2 text-warning text-sm'>{error && error.message}</p>
+            {
+                loading &&
+                <div className='h-screen w-screen absolute top-0 left-0 z-[999999] bg-base-300/50'>
+                    <div className='h-full flex items-center justify-center'>
+                        <Loading />
+                    </div>
+                </div>
+            }
         </div>
     );
 };

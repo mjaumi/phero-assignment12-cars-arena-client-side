@@ -33,7 +33,10 @@ module.exports = {
       }
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [
+    require('tw-elements/dist/plugin'),
+    require('daisyui')
+  ],
   daisyui: {
     themes: [
       {
