@@ -19,7 +19,7 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
     useEffect(() => {
         const getClientSecretKey = async () => {
             if (totalPrice) {
-                const { data } = await axios.post('http://localhost:5000/create-payment-intent', { price: totalPrice });
+                const { data } = await axios.post('https://shielded-mountain-18545.herokuapp.com/create-payment-intent', { price: totalPrice });
 
                 setClientSecret(data);
             }
@@ -67,7 +67,7 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
                 const paymentStatus = {
                     tId: paymentIntent.id,
                 }
-                const url = `http://localhost:5000/order/${_id}`;
+                const url = `https://shielded-mountain-18545.herokuapp.com/order/${_id}`;
                 const { data } = await axios.patch(url, paymentStatus);
 
                 if (data.modifiedCount > 0) {

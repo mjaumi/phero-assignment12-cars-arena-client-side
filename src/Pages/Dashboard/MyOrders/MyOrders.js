@@ -20,7 +20,7 @@ const MyOrders = () => {
     const [showCheckoutModal, setShowCheckoutModal] = useState(false);
 
     // integration of react query
-    const url = `http://localhost:5000/orders?email=${user?.email}`;
+    const url = `https://shielded-mountain-18545.herokuapp.com/orders?email=${user?.email}`;
     const { data: userOrders, isLoading, refetch } = useQuery('userOrders', () => axios.get(url));
 
     if (isLoading) {
@@ -29,7 +29,7 @@ const MyOrders = () => {
 
     // getting selected order that the user wants to pay
     const getSelectedOrder = async (id) => {
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://shielded-mountain-18545.herokuapp.com/order/${id}`;
         const { data } = await axios.get(url);
         setOrder(data);
     }
@@ -49,6 +49,7 @@ const MyOrders = () => {
                                 <th>Ordered Quantity</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
+                                <th>Transaction ID</th>
                                 <th>Pay</th>
                                 <th>Delete</th>
                             </tr>

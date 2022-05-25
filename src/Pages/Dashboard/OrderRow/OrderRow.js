@@ -2,7 +2,7 @@ import React from 'react';
 
 const OrderRow = ({ order, index, getSelectedOrder, setShowCheckoutModal }) => {
     // destructuring the props
-    const { _id, productName, orderedQuantity, totalPrice, status } = order;
+    const { _id, productName, orderedQuantity, totalPrice, status, tId } = order;
 
     const handlePayButton = () => {
         setShowCheckoutModal(true);
@@ -17,6 +17,7 @@ const OrderRow = ({ order, index, getSelectedOrder, setShowCheckoutModal }) => {
             <td className='bg-accent'>{orderedQuantity}</td>
             <td className='bg-accent'>$ {totalPrice}</td>
             <td className={`${status === 'unpaid' ? 'text-warning' : 'text-green-700'} font-semiBold bg-accent`}>{status === 'unpaid' ? 'Unpaid' : 'Paid'}</td>
+            <td className={`bg-accent ${tId ? 'text-green-700' : 'text-neutral'}  font-bold`}>{tId ? tId : '-'}</td>
             <td className='bg-accent'>
                 {
                     status === 'unpaid' &&
