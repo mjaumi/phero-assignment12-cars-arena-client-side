@@ -1,11 +1,17 @@
 import React from 'react';
 
-const OrderRow = ({ order, index, getSelectedOrder, setShowCheckoutModal }) => {
+const OrderRow = ({ order, index, getSelectedOrder, setShowCheckoutModal, setShowOrderDeleteModal }) => {
     // destructuring the props
     const { _id, productName, orderedQuantity, totalPrice, status, tId } = order;
 
+    // event handler for pay button
     const handlePayButton = () => {
         setShowCheckoutModal(true);
+        getSelectedOrder(_id);
+    }
+
+    const handleDeleteButton = () => {
+        setShowOrderDeleteModal(true);
         getSelectedOrder(_id);
     }
 
@@ -27,7 +33,7 @@ const OrderRow = ({ order, index, getSelectedOrder, setShowCheckoutModal }) => {
             <td className='bg-accent'>
                 {
                     status === 'unpaid' &&
-                    <button className='btn btn-error btn-sm capitalize'>Delete</button>
+                    <label onClick={handleDeleteButton} htmlFor='order-delete-modal' className='btn btn-error btn-sm capitalize'>Delete</label >
                 }
             </td>
         </tr >

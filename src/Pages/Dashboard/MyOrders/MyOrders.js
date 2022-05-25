@@ -8,8 +8,9 @@ import PageTitle from '../../Shared/PageTitle/PageTitle';
 import OrderRow from '../OrderRow/OrderRow';
 import CheckoutModal from '../CheckoutModal/CheckoutModal';
 import { Elements } from '@stripe/react-stripe-js';
+import OrderDeleteModal from '../OrderDeleteModal/OrderDeleteModal';
 
-const stripePromise = loadStripe('pk_test_51L0UtOAfMwzElyY70PHAgHmS8BwHD0eNNBhbtMPiBcTOs2hwHhj8bqlrojUJ0si4WYCLH3lUEln0ki0mvAZa62IC00kZA5TtFf');
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const MyOrders = () => {
     // integration of react firebase hooks
@@ -18,6 +19,7 @@ const MyOrders = () => {
     // integration of react hooks
     const [order, setOrder] = useState({});
     const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+    const [showOrderDeleteModal, setShowOrderDeleteModal] = useState(false);
 
     // integration of react query
     const url = `https://shielded-mountain-18545.herokuapp.com/orders?email=${user?.email}`;
@@ -62,6 +64,7 @@ const MyOrders = () => {
                                     index={index}
                                     getSelectedOrder={getSelectedOrder}
                                     setShowCheckoutModal={setShowCheckoutModal}
+                                    setShowOrderDeleteModal={setShowOrderDeleteModal}
                                 />)
                             }
                         </tbody>
@@ -77,6 +80,14 @@ const MyOrders = () => {
                         setShowCheckoutModal={setShowCheckoutModal}
                     />
                 </Elements>
+            }
+            {
+                showOrderDeleteModal &&
+                <OrderDeleteModal
+                    order={order}
+                    refetch={refetch}
+                    setShowOrderDeleteModal={setShowOrderDeleteModal}
+                />
             }
         </div>
     );
