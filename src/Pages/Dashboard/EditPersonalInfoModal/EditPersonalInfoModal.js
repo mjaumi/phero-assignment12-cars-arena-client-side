@@ -1,20 +1,26 @@
 import { faFloppyDisk, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import { useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 
-const EditPersonalInfoModal = ({ refetch, user, userInfo, setShowEditInfoModal }) => {
+const EditPersonalInfoModal = ({ refetch, user, userInfo, setShowEditInfoModal, setShowLoading }) => {
     // integration of react firebase hook
     const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
 
     // integration of react hook form
     const { register, handleSubmit } = useForm();
 
+    // integration of react hooks
+    const navigate = useNavigate();
+
     // handling updating user info here
     const handleUpdateUserInfo = async (data) => {
+        setShowLoading(true);
         if (data.profileImage[0]) {
             const image = data.profileImage[0];
             const imageFormData = new FormData();
@@ -41,7 +47,23 @@ const EditPersonalInfoModal = ({ refetch, user, userInfo, setShowEditInfoModal }
 
             const infoUpdateUrl = `https://shielded-mountain-18545.herokuapp.com/user?email=${user?.email}`;
 
-            const result = await axios.patch(infoUpdateUrl, updatedUser);
+            const result = await axios.patch(infoUpdateUrl, updatedUser, {
+                method: 'PATCH',
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
+
+            if (result.status === 403) {
+                toast.error('Forbidden Access. Please, Login again!!!');
+                signOut(auth);
+                navigate('/');
+
+            } else if (result.status === 401) {
+                toast.error('Unauthorized Access. Please, Login again!!!');
+                signOut(auth);
+                navigate('/');
+            }
 
             if (result.status === 200) {
                 toast.success('Profile Updated Successfully!!!');
@@ -50,6 +72,7 @@ const EditPersonalInfoModal = ({ refetch, user, userInfo, setShowEditInfoModal }
 
         refetch();
         setShowEditInfoModal(false);
+        setShowLoading(false);
     }
 
     if (updatingError) {

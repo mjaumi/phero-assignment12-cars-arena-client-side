@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useQuery } from 'react-query';
+import Loading from '../../Shared/Loading/Loading';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
 import ProductRow from '../ProductRow/ProductRow';
 
@@ -9,7 +10,11 @@ const ManageProducts = () => {
     const { data: allParts, isLoading, refetch } = useQuery('allParts', () => axios.get('https://shielded-mountain-18545.herokuapp.com/parts'));
 
     if (isLoading) {
-        return <p>Loading</p>;
+        return (
+            <div className='h-screen flex justify-center items-center'>
+                <Loading />
+            </div>
+        );
     }
 
     // rendering manage products component here

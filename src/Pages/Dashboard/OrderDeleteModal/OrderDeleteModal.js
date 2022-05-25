@@ -1,23 +1,46 @@
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon, } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import auth from '../../../firebase.init';
 
-const OrderDeleteModal = ({ order, setShowOrderDeleteModal, refetch }) => {
+const OrderDeleteModal = ({ order, setShowOrderDeleteModal, setShowLoading, refetch }) => {
+    // integration of react hooks
+    const navigate = useNavigate();
 
     // deleting the order here
     const deleteOrder = async () => {
+        setShowLoading(true);
         const url = `https://shielded-mountain-18545.herokuapp.com/order/${order._id}`;
-        const { data } = await axios.delete(url);
+        const result = await axios.delete(url, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
 
-        if (data.acknowledged) {
+        if (result.status === 403) {
+            toast.error('Forbidden Access. Please, Login again!!!');
+            signOut(auth);
+            navigate('/');
+
+        } else if (result.status === 401) {
+            toast.error('Unauthorized Access. Please, Login again!!!');
+            signOut(auth);
+            navigate('/');
+        }
+
+        if (result.status === 200) {
             toast.success('Order Deleted Successfully!!!');
         } else {
             toast.error('Failed To Delete The Order');
         }
         setShowOrderDeleteModal(false);
         refetch();
+        setShowLoading(false);
     }
 
     // rendering order delete modal here

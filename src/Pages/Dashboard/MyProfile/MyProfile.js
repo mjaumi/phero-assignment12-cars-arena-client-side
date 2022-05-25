@@ -1,7 +1,10 @@
 import { faUserAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../../firebase.init';
 import useUserInfo from '../../../hooks/useUserInfo';
 import Loading from '../../Shared/Loading/Loading';
@@ -13,17 +16,36 @@ const MyProfile = () => {
     const [user] = useAuthState(auth);
 
     // integration of react hooks
+    const navigate = useNavigate();
+
+    // integration of react hooks
     const [showEditInfoModal, setShowEditInfoModal] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     // integration of custom hooks
-    const [userInfo, isLoading, refetch] = useUserInfo(user);
+    const [userInfo, isLoading, refetch, error] = useUserInfo(user?.email);
 
     //scroll to the top on render
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    if (isLoading) {
+    // checking the JWT
+    useEffect(() => {
+        if (error) {
+            if (error.response.status === 403) {
+                toast.error('Forbidden Access. Please, Login again!!!');
+
+            } else if (error.response.status === 401) {
+                toast.error('Unauthorized Access. Please, Login again!!!');
+            }
+
+            signOut(auth);
+            navigate('/');
+        }
+    }, [error, navigate]);
+
+    if (isLoading || showLoading) {
         return (
             <div className='h-screen flex justify-center items-center'>
                 <Loading />
@@ -91,6 +113,7 @@ const MyProfile = () => {
                     user={user}
                     userInfo={userInfo.data}
                     setShowEditInfoModal={setShowEditInfoModal}
+                    setShowLoading={setShowLoading}
                 />
             }
         </div>

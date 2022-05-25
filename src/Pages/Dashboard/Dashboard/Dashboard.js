@@ -10,7 +10,7 @@ const Dashboard = () => {
     const [user, loading] = useAuthState(auth);
 
     // integration of custom hooks
-    const [userInfo, isLoading] = useUserInfo(user);
+    const [userInfo, isLoading] = useUserInfo(user?.email);
 
     if (loading || isLoading) {
         return (
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     // rendering dashboard component here
     return (
-        <section className='pt-20'>
+        <section className='pt-20 overflow-hidden'>
             <div className='drawer drawer-mobile h-fit'>
                 <input id='dashboard-drawer' type='checkbox' className='drawer-toggle' />
                 <div className='drawer-content pt-10 bg-base-100'>

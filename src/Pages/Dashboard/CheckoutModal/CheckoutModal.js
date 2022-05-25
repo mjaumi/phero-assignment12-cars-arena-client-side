@@ -1,7 +1,11 @@
 import { CardCvcElement, CardExpiryElement, CardNumberElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import auth from '../../../firebase.init';
+import Loading from '../../Shared/Loading/Loading';
 
 const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
     // integration of stripe hooks
@@ -12,6 +16,7 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
     const [cardError, setCardError] = useState('');
     const [processing, setProcessing] = useState(false);
     const [clientSecret, setClientSecret] = useState('');
+    const navigate = useNavigate();
 
     // destructuring the props
     const { _id, email, name, orderedQuantity, totalPrice } = order;
@@ -20,12 +25,28 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
     useEffect(() => {
         const getClientSecretKey = async () => {
             if (totalPrice) {
-                const { data } = await axios.post('https://shielded-mountain-18545.herokuapp.com/create-payment-intent', { price: totalPrice });
-                setClientSecret(data);
+                const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/create-payment-intent', { price: totalPrice }, {
+                    method: 'POST',
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
+
+                if (result.status === 403) {
+                    toast.error('Forbidden Access. Please, Login again!!!');
+                    signOut(auth);
+                    navigate('/');
+                } else if (result.status === 401) {
+                    toast.error('Unauthorized Access. Please, Login again!!!');
+                    signOut(auth);
+                    navigate('/');
+                }
+
+                setClientSecret(result.data);
             }
         }
         totalPrice && getClientSecretKey();
-    }, [totalPrice]);
+    }, [totalPrice, navigate]);
 
     const handlePayment = async (event) => {
         event.preventDefault();
@@ -68,15 +89,32 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
                     tId: paymentIntent.id,
                 }
                 const url = `https://shielded-mountain-18545.herokuapp.com/order/${_id}`;
-                const { data } = await axios.patch(url, paymentStatus);
+                const result = await axios.patch(url, paymentStatus, {
+                    method: 'PATCH',
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
 
-                if (data.modifiedCount > 0) {
+                if (result.status === 403) {
+                    toast.error('Forbidden Access. Please, Login again!!!');
+                    signOut(auth);
+                    navigate('/');
+
+                } else if (result.status === 401) {
+                    toast.error('Unauthorized Access. Please, Login again!!!');
+                    signOut(auth);
+                    navigate('/');
+                }
+
+                if (result.data.modifiedCount > 0) {
                     toast.success('Payment Successful!!!');
                 } else {
                     toast.error('Payment Was Rejected!!!');
                 }
 
                 setShowCheckoutModal(false);
+                setProcessing(false);
                 refetch();
             }
         }
@@ -198,6 +236,14 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
                     }
                 </div>
             </div>
+            {
+                processing &&
+                <div className='h-full w-screen absolute top-0 left-0 z-[999999] bg-base-300/50'>
+                    <div className='h-full flex items-center justify-center'>
+                        <Loading />
+                    </div>
+                </div>
+            }
         </div>
     );
 };

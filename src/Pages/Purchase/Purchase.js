@@ -7,6 +7,7 @@ import auth from '../../firebase.init';
 import ArenaButton from '../Shared/ArenaButton/ArenaButton';
 import Dropdown from '../Shared/Dropdown/Dropdown';
 import PageTitle from '../Shared/PageTitle/PageTitle';
+import Loading from '../Shared/Loading/Loading';
 
 const Purchase = () => {
     // integration of react firebase hooks
@@ -18,6 +19,7 @@ const Purchase = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [disableMinusButton, setDisableMinusButton] = useState(true);
     const [disablePlusButton, setDisablePlusButton] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
     const { id } = useParams();
     const alterQuantityRef = useRef();
     const orderQuantityRef = useRef();
@@ -30,10 +32,12 @@ const Purchase = () => {
     // fetching individual part
     useEffect(() => {
         const getPartById = async () => {
+            setShowLoading(true);
             const url = `https://shielded-mountain-18545.herokuapp.com/parts/${id}`;
             const { data } = await axios.get(url);
             setPart(data);
             setOrderQuantity(part.minimumOrderQuantity);
+            setShowLoading(false);
         }
         getPartById();
     }, [id, part.minimumOrderQuantity]);
@@ -57,6 +61,8 @@ const Purchase = () => {
     // event handler for confirming orders
     const handleConfirmOrder = async (event) => {
         event.preventDefault();
+        window.scrollTo(0, 0);
+        setShowLoading(true);
 
         const email = event.target.email.value;
         const name = event.target.name.value;
@@ -87,6 +93,7 @@ const Purchase = () => {
         }
 
         event.target.reset();
+        setShowLoading(false);
     }
 
     // handling alter order quantity
@@ -122,129 +129,138 @@ const Purchase = () => {
     return (
         <section className='pt-20 w-[95%] md:w-4/5 mx-auto'>
             <PageTitle title={'Purchase'} />
-            <div className='flex flex-col w-[95%] md:w-full mx-auto md:flex-row my-20'>
-                <div className='md:w-1/2 flex flex-col justify-center'>
-                    <img src={part.img} alt={part.name} />
-                </div>
-                <div className='mt-10 md:mt-0 md:ml-10 md:w-1/2 md:text-left flex flex-col justify-center'>
-                    <h3 className='text-3xl text-primary font-bold'>{part.name}</h3>
-                    <p className='mt-8 text-secondary'>{part.description}</p>
-                    <div className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-8'>
-                        <div>
-                            <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Design</h3>
-                            <p className='mt-3 text-lg'>{part.design}</p>
-                        </div>
-                        <div>
-                            <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Technology</h3>
-                            <p className='mt-3 text-lg'>{part.technology}</p>
-                        </div>
-                        <div>
-                            <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Size</h3>
-                            <p className='mt-3 text-lg'>{part.size}"</p>
-                        </div>
-                        <div>
-                            <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Weight</h3>
-                            <p className='mt-3 text-lg'>{part.weight} Kg</p>
-                        </div>
-                        <div>
-                            <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Warranty</h3>
-                            <p className='mt-3 text-lg'>{part.warranty} Years</p>
-                        </div>
-                        <div>
-                            <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Available</h3>
-                            <p className='mt-3 text-lg'>{part.availableQuantity} {part.availableQuantity > 1 ? 'Units' : 'Unit'}</p>
-                        </div>
-                        <div className='md:col-span-3'>
-                            <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit md:w-full px-5 md:px-0 md:pr-5'>Minimum Order Quantity</h3>
-                            <p className='mt-3 text-lg'>{part.minimumOrderQuantity} {part.minimumOrderQuantity > 1 ? 'Units' : 'Unit'}</p>
-                        </div>
-                    </div>
-                    <div className='mt-8'>
-                        <h2 className='font-extralight'><span className='text-4xl text-primary font-bold'>${part.price}</span>/Unit</h2>
-                    </div>
-                    <div className='mt-10'>
-                        <h4 className='text-3xl font-semibold'>Order Product</h4>
-                        <div className='mt-5 grid grid-cols-1 md:grid-cols-2'>
-                            <div className='form-control w-[200px] mx-auto md:mx-0'>
-                                <label className='label'>
-                                    <span className="label-text">Order Quantity</span>
-                                </label>
-                                <div className='flex items-center'>
-                                    <button onClick={() => alterOrderQuantity(-1)} className='btn btn-outline btn-secondary rounded-none text-2xl disabled:cursor-not-allowed' disabled={disableMinusButton}>-</button>
-                                    <input ref={orderQuantityRef} type='number' placeholder='Enter Quantity' value={orderQuantity || ''} className='input input-bordered input-secondary rounded-none w-full text-center text-neutral' readOnly />
-                                    <button onClick={() => alterOrderQuantity(1)} className='btn btn-outline btn-secondary rounded-none text-2xl' disabled={disablePlusButton}>+</button>
+            {
+                !showLoading ?
+                    <>
+                        <div className='flex flex-col w-[95%] md:w-full mx-auto md:flex-row my-20'>
+                            <div className='md:w-1/2 flex flex-col justify-center'>
+                                <img src={part.img} alt={part.name} />
+                            </div>
+                            <div className='mt-10 md:mt-0 md:ml-10 md:w-1/2 md:text-left flex flex-col justify-center'>
+                                <h3 className='text-3xl text-primary font-bold'>{part.name}</h3>
+                                <p className='mt-8 text-secondary'>{part.description}</p>
+                                <div className='mt-10 grid grid-cols-1 md:grid-cols-3 gap-8'>
+                                    <div>
+                                        <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Design</h3>
+                                        <p className='mt-3 text-lg'>{part.design}</p>
+                                    </div>
+                                    <div>
+                                        <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Technology</h3>
+                                        <p className='mt-3 text-lg'>{part.technology}</p>
+                                    </div>
+                                    <div>
+                                        <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Size</h3>
+                                        <p className='mt-3 text-lg'>{part.size}"</p>
+                                    </div>
+                                    <div>
+                                        <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Weight</h3>
+                                        <p className='mt-3 text-lg'>{part.weight} Kg</p>
+                                    </div>
+                                    <div>
+                                        <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Warranty</h3>
+                                        <p className='mt-3 text-lg'>{part.warranty} Years</p>
+                                    </div>
+                                    <div>
+                                        <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit px-5 md:px-0 md:pr-5'>Available</h3>
+                                        <p className='mt-3 text-lg'>{part.availableQuantity} {part.availableQuantity > 1 ? 'Units' : 'Unit'}</p>
+                                    </div>
+                                    <div className='md:col-span-3'>
+                                        <h3 className='font-semibold text-2xl md:text-3xl text-neutral border-b-4 border-primary mx-auto md:mx-0 w-fit md:w-full px-5 md:px-0 md:pr-5'>Minimum Order Quantity</h3>
+                                        <p className='mt-3 text-lg'>{part.minimumOrderQuantity} {part.minimumOrderQuantity > 1 ? 'Units' : 'Unit'}</p>
+                                    </div>
+                                </div>
+                                <div className='mt-8'>
+                                    <h2 className='font-extralight'><span className='text-4xl text-primary font-bold'>${part.price}</span>/Unit</h2>
+                                </div>
+                                <div className='mt-10'>
+                                    <h4 className='text-3xl font-semibold'>Order Product</h4>
+                                    <div className='mt-5 grid grid-cols-1 md:grid-cols-2'>
+                                        <div className='form-control w-[200px] mx-auto md:mx-0'>
+                                            <label className='label'>
+                                                <span className="label-text">Order Quantity</span>
+                                            </label>
+                                            <div className='flex items-center'>
+                                                <button onClick={() => alterOrderQuantity(-1)} className='btn btn-outline btn-secondary rounded-none text-2xl disabled:cursor-not-allowed' disabled={disableMinusButton}>-</button>
+                                                <input ref={orderQuantityRef} type='number' placeholder='Enter Quantity' value={orderQuantity || ''} className='input input-bordered input-secondary rounded-none w-full text-center text-neutral' readOnly />
+                                                <button onClick={() => alterOrderQuantity(1)} className='btn btn-outline btn-secondary rounded-none text-2xl' disabled={disablePlusButton}>+</button>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div className='form-control w-[140px] mx-auto md:mx-0 mt-5 md:mt-0'>
+                                                <label className='label'>
+                                                    <span className='label-text'>Alter Quantity By</span>
+                                                </label>
+                                                <Dropdown
+                                                    dropDownOnClick={handleAlterValueChange}
+                                                    dropDownRef={alterQuantityRef}
+                                                    dropdownName='alterQuantity'
+                                                    dropdownDefaultValue={1}
+                                                    dropdownMenu={[1, 5, 10, 50, 100]} />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <div className='w-[95%] md:w-full mx-auto my-20'>
                             <div>
-                                <div className='form-control w-[140px] mx-auto md:mx-0 mt-5 md:mt-0'>
-                                    <label className='label'>
-                                        <span className='label-text'>Alter Quantity By</span>
-                                    </label>
-                                    <Dropdown
-                                        dropDownOnClick={handleAlterValueChange}
-                                        dropDownRef={alterQuantityRef}
-                                        dropdownName='alterQuantity'
-                                        dropdownDefaultValue={1}
-                                        dropdownMenu={[1, 5, 10, 50, 100]} />
-                                </div>
+                                <h2 className='text-3xl md:text-4xl text-neutral font-bold mb-3'>Order Form</h2>
+                                <p className='text-secondary'>Please, fill up the following form in order to confirm the order.</p>
+                            </div>
+                            <div className='mt-10 w-[95%] md:w-[70%] mx-auto'>
+                                <form onSubmit={handleConfirmOrder}>
+                                    <div className='form-control w-full'>
+                                        <label className='label'>
+                                            <span className="label-text after:content-['*'] after:text-primary">Email</span>
+                                        </label>
+                                        <input type='email' name='email' placeholder='Enter Your Email' className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly value={user ? user.email : ''} />
+                                    </div>
+                                    <div className='flex flex-col md:flex-row mt-5'>
+                                        <div className='form-control w-full'>
+                                            <label className='label'>
+                                                <span className="label-text after:content-['*'] after:text-primary">Name</span>
+                                            </label>
+                                            <input type='text' name='name' placeholder='Enter Your Name' className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly value={user ? user.displayName : ''} />
+                                        </div>
+                                        <div className='form-control w-full mt-5 md:mt-0 md:ml-10'>
+                                            <label className='label'>
+                                                <span className="label-text after:content-['*'] after:text-primary">Phone Number</span>
+                                            </label>
+                                            <input type='number' name='phone' placeholder='Enter Your Phone Number' className='input input-bordered input-secondary rounded-none w-full text-neutral' required />
+                                        </div>
+                                    </div>
+                                    <div className='flex flex-col md:flex-row mt-5'>
+                                        <div className='form-control w-full'>
+                                            <label className='label'>
+                                                <span className="label-text after:content-['*'] after:text-primary">Ordered Quantity</span>
+                                            </label>
+                                            <input type='text' name='orderedQuantity' placeholder='Enter Your Ordered Quantity' value={`${orderQuantity || ''} Units`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
+                                        </div>
+                                        <div className='form-control w-full mt-5 md:mt-0 md:ml-10'>
+                                            <label className='label'>
+                                                <span className="label-text after:content-['*'] after:text-primary">Total Price</span>
+                                            </label>
+                                            <input type='text' name='totalPrice' placeholder='Total Price' value={`$ ${totalPrice || ''}`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
+                                        </div>
+                                    </div>
+                                    <div className='form-control mt-5'>
+                                        <label className='label'>
+                                            <span className="label-text after:content-['*'] after:text-primary">Address</span>
+                                        </label>
+                                        <textarea name='address' className='textarea textarea-bordered textarea-secondary rounded-none h-24 text-neutral' placeholder='Type Your Address Here...' required></textarea>
+                                    </div>
+                                    <div className='mt-8 md:w-3/12 mx-auto'>
+                                        <ArenaButton type={'submit'}>Confirm Order</ArenaButton>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                    </>
+                    :
+                    <div className='h-screen w-full flex items-center justify-center'>
+                        <Loading />
                     </div>
-                </div>
-            </div>
-            <div className='w-[95%] md:w-full mx-auto my-20'>
-                <div>
-                    <h2 className='text-3xl md:text-4xl text-neutral font-bold mb-3'>Order Form</h2>
-                    <p className='text-secondary'>Please, fill up the following form in order to confirm the order.</p>
-                </div>
-                <div className='mt-10 w-[95%] md:w-[70%] mx-auto'>
-                    <form onSubmit={handleConfirmOrder}>
-                        <div className='form-control w-full'>
-                            <label className='label'>
-                                <span className="label-text after:content-['*'] after:text-primary">Email</span>
-                            </label>
-                            <input type='email' name='email' placeholder='Enter Your Email' className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly value={user ? user.email : ''} />
-                        </div>
-                        <div className='flex flex-col md:flex-row mt-5'>
-                            <div className='form-control w-full'>
-                                <label className='label'>
-                                    <span className="label-text after:content-['*'] after:text-primary">Name</span>
-                                </label>
-                                <input type='text' name='name' placeholder='Enter Your Name' className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly value={user ? user.displayName : ''} />
-                            </div>
-                            <div className='form-control w-full mt-5 md:mt-0 md:ml-10'>
-                                <label className='label'>
-                                    <span className="label-text after:content-['*'] after:text-primary">Phone Number</span>
-                                </label>
-                                <input type='number' name='phone' placeholder='Enter Your Phone Number' className='input input-bordered input-secondary rounded-none w-full text-neutral' required />
-                            </div>
-                        </div>
-                        <div className='flex flex-col md:flex-row mt-5'>
-                            <div className='form-control w-full'>
-                                <label className='label'>
-                                    <span className="label-text after:content-['*'] after:text-primary">Ordered Quantity</span>
-                                </label>
-                                <input type='text' name='orderedQuantity' placeholder='Enter Your Ordered Quantity' value={`${orderQuantity || ''} Units`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
-                            </div>
-                            <div className='form-control w-full mt-5 md:mt-0 md:ml-10'>
-                                <label className='label'>
-                                    <span className="label-text after:content-['*'] after:text-primary">Total Price</span>
-                                </label>
-                                <input type='text' name='totalPrice' placeholder='Total Price' value={`$ ${totalPrice || ''}`} className='input input-bordered input-secondary rounded-none w-full text-neutral' required readOnly />
-                            </div>
-                        </div>
-                        <div className='form-control mt-5'>
-                            <label className='label'>
-                                <span className="label-text after:content-['*'] after:text-primary">Address</span>
-                            </label>
-                            <textarea name='address' className='textarea textarea-bordered textarea-secondary rounded-none h-24 text-neutral' placeholder='Type Your Address Here...' required></textarea>
-                        </div>
-                        <div className='mt-8 md:w-3/12 mx-auto'>
-                            <ArenaButton type={'submit'}>Confirm Order</ArenaButton>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            }
         </section>
     );
 };

@@ -32,7 +32,7 @@ const Login = () => {
         await signInWithEmailAndPassword(data.email, data.password);
 
         // getting token from API
-        const result = await axios.post('http://localhost:5000/getToken', { email: data.email });
+        const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/getToken', { email: data.email });
         localStorage.setItem('accessToken', result.data.accessToken);
     }
 
@@ -111,7 +111,7 @@ const Login = () => {
             }
             {
                 loading &&
-                <div className='h-screen w-screen absolute top-0 left-0 z-[999999] bg-base-300/50'>
+                <div className='h-full w-screen absolute top-0 left-0 z-[999999] bg-base-300/50'>
                     <div className='h-full flex items-center justify-center'>
                         <Loading />
                     </div>
