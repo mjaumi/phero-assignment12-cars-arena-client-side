@@ -17,6 +17,8 @@ import ManageProducts from './Pages/Dashboard/ManageProducts/ManageProducts';
 import AddProduct from './Pages/Dashboard/AddProduct/AddProduct';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin/MakeAdmin';
 import ManageAllOrders from './Pages/Dashboard/ManageAllOrders/ManageAllOrders';
+import RequireAuth from './Pages/Login/RequireAuth/RequireAuth';
+import RequireAdmin from './Pages/Login/Login/RequireAdmin/RequireAdmin';
 
 function App() {
   return (
@@ -26,15 +28,38 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/purchase/:id' element={<Purchase />} />
-        <Route path='/dashboard' element={<Dashboard />} >
+        <Route path='/purchase/:id' element={
+          <RequireAuth>
+            <Purchase />
+          </RequireAuth>
+        } />
+        <Route path='/dashboard' element={
+          <RequireAuth>
+            <Dashboard />
+          </RequireAuth>
+        } >
           <Route index element={<MyProfile />} />
           <Route path='myOrders' element={<MyOrders />} />
           <Route path='addReview' element={<AddReview />} />
-          <Route path='manageProducts' element={<ManageProducts />} />
-          <Route path='addProduct' element={<AddProduct />} />
-          <Route path='manageOrders' element={<ManageAllOrders />} />
-          <Route path='makeAdmin' element={<MakeAdmin />} />
+          <Route path='manageProducts' element={
+            <RequireAdmin>
+              <ManageProducts />
+            </RequireAdmin>} />
+          <Route path='addProduct' element={
+            <RequireAdmin>
+              <AddProduct />
+            </RequireAdmin>
+          } />
+          <Route path='manageOrders' element={
+            <RequireAdmin>
+              <ManageAllOrders />
+            </RequireAdmin>
+          } />
+          <Route path='makeAdmin' element={
+            <RequireAdmin>
+              <MakeAdmin />
+            </RequireAdmin>
+          } />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>

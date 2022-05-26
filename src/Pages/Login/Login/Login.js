@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import ArenaButton from '../../Shared/ArenaButton/ArenaButton';
@@ -19,8 +19,12 @@ const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     // integration of react hook
-    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const [token, setToken] = useState('');
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     //scroll to the top on render
     useEffect(() => {
@@ -34,11 +38,12 @@ const Login = () => {
         // getting token from API
         const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/getToken', { email: data.email });
         localStorage.setItem('accessToken', result.data.accessToken);
+        setToken(result.data.accessToken);
     }
 
-    if (user) {
+    if (token && user) {
         toast.success('Log In Successful!!!');
-        navigate('/');
+        navigate(from, { replace: true });
     }
 
     // rendering login component here
