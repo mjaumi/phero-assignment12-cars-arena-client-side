@@ -1,4 +1,4 @@
-import { faQuoteRight } from '@fortawesome/free-solid-svg-icons';
+import { faQuoteRight, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { StarIcon } from '@heroicons/react/solid';
 import React from 'react';
@@ -13,7 +13,14 @@ const Review = ({ reviewData }) => {
         <div className='border border-accent px-6 py-8 grid grid-rows-arena-card'>
             <div className='flex items-center'>
                 <div className='w-20 h-20 rounded-full overflow-hidden border-2 border-primary'>
-                    <img src={userImg} alt={userName} />
+                    {
+                        userImg ?
+                            <img src={userImg} alt={userName} />
+                            :
+                            <div className='h-full bg-accent'>
+                                <FontAwesomeIcon icon={faUserAlt} className='mt-2 h-full' />
+                            </div>
+                    }
                 </div>
                 <div className='ml-5 text-left'>
                     <h4 className='text-xl text-neutral font-semibold'>{userName}</h4>

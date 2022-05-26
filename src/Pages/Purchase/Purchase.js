@@ -250,7 +250,7 @@ const Purchase = () => {
                                         <textarea name='address' className='textarea textarea-bordered textarea-secondary rounded-none h-24 text-neutral' placeholder='Type Your Address Here...' required></textarea>
                                     </div>
                                     <div className='mt-8 md:w-3/12 mx-auto'>
-                                        <ArenaButton type={'submit'}>Confirm Order</ArenaButton>
+                                        <ArenaButton disable={part.availableQuantity < part.minimumOrderQuantity} type={'submit'}>Confirm Order</ArenaButton>
                                     </div>
                                 </form>
                             </div>

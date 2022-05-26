@@ -19,7 +19,7 @@ const ManageOrderRow = ({ order, index, setSelectedOrderId, setShowShipmentModal
             <td className='bg-accent'>{productName}</td>
             <td className={`font-semiBold bg-accent`}>{orderedQuantity}</td>
             <td className='bg-accent'>$ {totalPrice}</td>
-            <td className={`${status === 'unpaid' && 'text-warning'} ${status === 'shipped' && 'text-success'} bg-accent font-bold`}>{status === 'paid' ? 'pending' : status}</td>
+            <td className={`${status === 'unpaid' && 'text-warning'} ${status === 'shipped' && 'text-success'} bg-accent font-bold capitalize`}>{status === 'paid' ? 'Pending' : status}</td>
             <td className='bg-accent'>
                 {
                     status === 'paid' &&

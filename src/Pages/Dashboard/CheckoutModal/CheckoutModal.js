@@ -108,7 +108,28 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
                 }
 
                 if (result.data.modifiedCount > 0) {
+                    const order = await axios.get(url, {
+                        method: 'GET',
+                        headers: {
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    });
+                    const partsUrl = `https://shielded-mountain-18545.herokuapp.com/parts/${order.data.productId}`
+                    const parts = await axios.get(partsUrl);
+
+                    const newAvailable = {
+                        availableQuantity: parts.data.availableQuantity - order.data.orderedQuantity
+                    }
+
+                    const updatePartUrl = `https://shielded-mountain-18545.herokuapp.com/updateParts/${parts.data._id}`
+                    await axios.patch(updatePartUrl, newAvailable, {
+                        method: 'PATCH',
+                        headers: {
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        }
+                    });
                     toast.success('Payment Successful!!!');
+
                 } else {
                     toast.error('Payment Was Rejected!!!');
                 }
@@ -238,7 +259,7 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
             </div>
             {
                 processing &&
-                <div className='h-full w-screen absolute top-0 left-0 z-[999999] bg-base-300/50'>
+                <div className='h-screen w-full absolute top-0 left-0 z-[999999] bg-base-300/50'>
                     <div className='h-full flex items-center justify-center'>
                         <Loading />
                     </div>

@@ -16,7 +16,7 @@ const UserRow = ({ user, index, setShowMakeAdminModal, setUserId }) => {
             <td className='bg-accent'>{_id}</td>
             <td className='bg-accent'>{email}</td>
             <td className={`font-semiBold bg-accent`}>{phone ? phone : '-'}</td>
-            <td className={`bg-accent font-bold`}>{role}</td>
+            <td className={`bg-accent font-bold capitalize`}>{role}</td>
             <td className='bg-accent'>
                 {
                     role === 'user' ?

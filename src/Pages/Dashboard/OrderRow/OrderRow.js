@@ -23,7 +23,7 @@ const OrderRow = ({ order, index, getSelectedOrder, setShowCheckoutModal, setSho
             <td className='bg-accent'>{productName}</td>
             <td className='bg-accent'>{orderedQuantity}</td>
             <td className='bg-accent'>$ {totalPrice}</td>
-            <td className={`${status === 'unpaid' ? 'text-warning' : 'text-green-700'} font-semiBold bg-accent`}>{status === 'unpaid' ? 'Unpaid' : 'Paid'}</td>
+            <td className={`${status === 'unpaid' ? 'text-warning' : 'text-green-700'} font-semiBold bg-accent`}>{status === 'unpaid' && 'Unpaid'} {status === 'paid' && 'Paid'}{status === 'shipped' && 'Shipped'}</td>
             <td className={`bg-accent ${tId ? 'text-green-700' : 'text-neutral'}  font-bold`}>{tId ? tId : '-'}</td>
             <td className='bg-accent'>
                 {
