@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Summary from '../Summary/Summary';
 
@@ -7,9 +8,11 @@ const BusinessSummary = () => {
 
     // fetching the summary data
     useEffect(() => {
-        fetch('summaryData.json')
-            .then(res => res.json())
-            .then(data => setSummary(data));
+        const getSummaryData = async () => {
+            const { data } = await axios.get('http://localhost:5000/summary');
+            setSummary(data);
+        }
+        getSummaryData();
     }, []);
 
     // rendering business summary component here
