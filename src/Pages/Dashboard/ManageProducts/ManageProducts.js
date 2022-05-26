@@ -15,6 +15,7 @@ const ManageProducts = () => {
     // integration of react query
     const { data: allParts, isLoading, refetch } = useQuery('allParts', () => axios.get('https://shielded-mountain-18545.herokuapp.com/parts'));
 
+    // getting selected product
     const getSelectedPart = async (id) => {
         const url = `https://shielded-mountain-18545.herokuapp.com/parts/${id}`;
         const { data } = await axios.get(url);
