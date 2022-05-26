@@ -16,6 +16,7 @@ import AddReview from './Pages/Dashboard/AddReview/AddReview';
 import ManageProducts from './Pages/Dashboard/ManageProducts/ManageProducts';
 import AddProduct from './Pages/Dashboard/AddProduct/AddProduct';
 import MakeAdmin from './Pages/Dashboard/MakeAdmin/MakeAdmin';
+import ManageAllOrders from './Pages/Dashboard/ManageAllOrders/ManageAllOrders';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path='addReview' element={<AddReview />} />
           <Route path='manageProducts' element={<ManageProducts />} />
           <Route path='addProduct' element={<AddProduct />} />
+          <Route path='manageOrders' element={<ManageAllOrders />} />
           <Route path='makeAdmin' element={<MakeAdmin />} />
         </Route>
         <Route path='*' element={<NotFound />} />
