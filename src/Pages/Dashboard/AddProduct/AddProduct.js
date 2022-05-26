@@ -24,14 +24,16 @@ const AddProduct = () => {
 
     // event handler for adding new product
     const handleAddProduct = async (data) => {
+        window.scrollTo(0, 0);
         setShowLoading(true);
         const image = data.productImage[0];
         const imageFormData = new FormData();
         imageFormData.append('image', image);
         const imageUrl = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMAGEBB_APIKEY}`;
+        const imageResult = await axios.post(imageUrl, imageFormData);
 
         const name = data.name;
-        const img = imageUrl;
+        const img = imageResult.data.data.url;
         const minimumOrderQuantity = data.minimumQuantity;
         const availableQuantity = data.quantity;
         const price = data.price;
@@ -57,7 +59,7 @@ const AddProduct = () => {
         }
 
         console.log(newProduct);
-        const result = await axios.post('http://localhost:5000/parts', newProduct, {
+        const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/parts', newProduct, {
             method: 'POST',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

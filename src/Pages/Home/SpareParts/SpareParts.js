@@ -9,11 +9,11 @@ const SpareParts = () => {
 
     // fetching first 6 parts here
     useEffect(() => {
-        const getFirstSixParts = async () => {
-            const { data } = await axios.get('https://shielded-mountain-18545.herokuapp.com/topSixParts');
+        const getParts = async () => {
+            const { data } = await axios.get('https://shielded-mountain-18545.herokuapp.com/parts');
             setParts(data);
         }
-        getFirstSixParts();
+        getParts();
     }, []);
 
 

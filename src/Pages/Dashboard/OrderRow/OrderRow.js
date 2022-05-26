@@ -10,6 +10,7 @@ const OrderRow = ({ order, index, getSelectedOrder, setShowCheckoutModal, setSho
         getSelectedOrder(_id);
     }
 
+    // event handler for delete button
     const handleDeleteButton = () => {
         setShowOrderDeleteModal(true);
         getSelectedOrder(_id);

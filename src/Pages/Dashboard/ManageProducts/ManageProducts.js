@@ -1,15 +1,27 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../../Shared/Loading/Loading';
 import PageTitle from '../../Shared/PageTitle/PageTitle';
+import DeleteProductModal from '../DeleteProductModal/DeleteProductModal';
 import ProductRow from '../ProductRow/ProductRow';
 
 const ManageProducts = () => {
+    // integration of react hooks
+    const [showProductDeleteModal, setShowProductDeleteModal] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
+    const [part, setPart] = useState({});
+
     // integration of react query
     const { data: allParts, isLoading, refetch } = useQuery('allParts', () => axios.get('https://shielded-mountain-18545.herokuapp.com/parts'));
 
-    if (isLoading) {
+    const getSelectedPart = async (id) => {
+        const url = `https://shielded-mountain-18545.herokuapp.com/parts/${id}`;
+        const { data } = await axios.get(url);
+        setPart(data);
+    }
+
+    if (isLoading || showLoading) {
         return (
             <div className='h-screen flex justify-center items-center'>
                 <Loading />
@@ -42,12 +54,23 @@ const ManageProducts = () => {
                                     key={parts._id}
                                     parts={parts}
                                     index={index}
+                                    setShowProductDeleteModal={setShowProductDeleteModal}
+                                    getSelectedPart={getSelectedPart}
                                 />)
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
+            {
+                showProductDeleteModal &&
+                <DeleteProductModal
+                    part={part}
+                    refetch={refetch}
+                    setShowLoading={setShowLoading}
+                    setShowProductDeleteModal={setShowProductDeleteModal}
+                />
+            }
         </div>
     );
 };

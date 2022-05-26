@@ -1,9 +1,13 @@
 import React from 'react';
 
-const ProductRow = ({ parts, index }) => {
+const ProductRow = ({ parts, index, setShowProductDeleteModal, getSelectedPart }) => {
     // destructuring the props
     const { _id, name, price, availableQuantity, minimumOrderQuantity } = parts;
 
+    const handleProductDeleteButton = () => {
+        setShowProductDeleteModal(true);
+        getSelectedPart(_id);
+    }
 
     // rendering product row component here
     return (
@@ -16,8 +20,7 @@ const ProductRow = ({ parts, index }) => {
             <td className={`bg-accent font-bold`}>{minimumOrderQuantity}</td>
             <td className='bg-accent'>
                 {
-
-                    <label htmlFor='order-delete-modal' className='btn btn-error btn-sm capitalize'>Delete</label >
+                    <label onClick={handleProductDeleteButton} htmlFor='product-delete-modal' className='btn btn-error btn-sm capitalize'>Delete</label >
                 }
             </td>
         </tr >
