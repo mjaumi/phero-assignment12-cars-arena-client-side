@@ -40,7 +40,7 @@ const ContactUs = () => {
 
     // rendering contact us component here
     return (
-        <section className='py-40 bg-base-200'>
+        <section id='contact' className='py-40 bg-base-200'>
             <div className='w-[95%] md:w-4/5 mx-auto'>
                 <div>
                     <h2 className='text-3xl md:text-4xl text-neutral font-bold mb-3'>Have Any Questions?</h2>

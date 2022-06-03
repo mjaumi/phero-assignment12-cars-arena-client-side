@@ -4,7 +4,7 @@ const AboutUs = () => {
 
     // rendering about us component here
     return (
-        <section className='my-40 w-[95%] md:w-4/5 mx-auto'>
+        <section id='about' className='py-40 w-[95%] md:w-4/5 mx-auto'>
             <div className='flex flex-col-reverse md:flex-row'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
                     <div className='bg-about-first-img h-[650px] w-[300px] mx-auto bg-contain bg-no-repeat'></div>

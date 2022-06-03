@@ -19,7 +19,7 @@ const Home = () => {
 
     //rendering home component here
     return (
-        <section>
+        <section id='home'>
             <PageTitle title={'Home'} />
             <Banner />
             <SpareParts />

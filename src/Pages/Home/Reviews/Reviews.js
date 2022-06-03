@@ -20,7 +20,7 @@ const Reviews = () => {
 
     // rendering review components here
     return (
-        <section className='my-40 w-[95%] md:w-4/5 mx-auto'>
+        <section id='reviews' className='py-40 w-[95%] md:w-4/5 mx-auto'>
             <div className='flex justify-between'>
                 <div className='hidden md:block'>
                     <FontAwesomeIcon icon={faQuoteLeft} className='w-32 h-32 text-primary opacity-40' />

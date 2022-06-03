@@ -84,14 +84,14 @@ const Header = () => {
                     </div>
                     <div className='navbar-end hidden lg:flex flex-1'>
                         <ul className='menu menu-horizontal p-0 mr-5 text-neutral text-lg font-extralight'>
-                            <li><Link to='/'>Home</Link></li>
-                            <li><Link to='/'>Spare Parts</Link></li>
-                            <li><Link to='/'>Reviews</Link></li>
-                            <li><Link to='/'>Featured</Link></li>
-                            <li><Link to='/'>About Us</Link></li>
-                            <li><Link to='/'>Services</Link></li>
-                            <li><Link to='/'>Our Team</Link></li>
-                            <li><Link to='/'>Contact</Link></li>
+                            <li><a href='#home'>Home</a></li>
+                            <li><a href='#spareParts'>Spare Parts</a></li>
+                            <li><a href='#reviews'>Reviews</a></li>
+                            <li><a href='#featured'>Featured</a></li>
+                            <li><a href='#about'>About Us</a></li>
+                            <li><a href='#services'>Services</a></li>
+                            <li><a href='#ourTeam'>Our Team</a></li>
+                            <li><a href='#contact'>Contact</a></li>
                         </ul>
                         {
                             (user && location.pathname !== '/signup') ? <>
