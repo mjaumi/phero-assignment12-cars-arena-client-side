@@ -34,7 +34,7 @@ const Header = () => {
         <header className='bg-base-300 py-3 bg-opacity-70 sticky top-0 -mb-[90px] z-[99999] backdrop-blur-[6px]'>
             <nav className='w-full md:w-4/5 mx-auto'>
                 <div className='navbar p-0'>
-                    <div className='navbar-start'>
+                    <div>
                         <div className='dropdown'>
                             <label tabIndex='0' className='btn btn-ghost lg:hidden'>
                                 <svg xmlns='http://www.w3.org/2000/svg' className='h-5 w-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h8m-8 6h16' /></svg>
@@ -42,8 +42,10 @@ const Header = () => {
                             <ul tabIndex='0' className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52'>
                                 <div className='flex flex-col items-center'>
                                     <li><Link to='/'>Home</Link></li>
-                                    <li><Link to='/blogs'>Blogs</Link></li>
-                                    <li><Link to='/myPortfolio'>My Portfolio</Link></li>
+                                    <li><Link to='/'>Spare Parts</Link></li>
+                                    <li><Link to='/'>Reviews</Link></li>
+                                    <li><Link to='/'>About</Link></li>
+                                    <li><Link to='/'>Contact</Link></li>
                                     {
                                         (user && !location.pathname === '/signup') ? <>
                                             <div onClick={showMenu} className='btn btn-ghost relative flex items-center normal-case'>
@@ -73,18 +75,23 @@ const Header = () => {
                                             </div>
                                         </>
                                             :
-                                            <Link to='/login' className='btn btn-secondary btn-md rounded-none text-neutral mt-5'>Log In</Link>
+                                            <Link to='/login' className='btn btn-secondary btn-md rounded-none text-neutral mt-5 capitalize'>Log In</Link>
                                     }
                                 </div>
                             </ul>
                         </div>
                         <Link to='/' className='btn btn-ghost normal-case text-lg font-extralight'>Cars <span className='text-3xl font-bold text-primary'>Arena</span></Link>
                     </div>
-                    <div className='navbar-end hidden lg:flex'>
+                    <div className='navbar-end hidden lg:flex flex-1'>
                         <ul className='menu menu-horizontal p-0 mr-5 text-neutral text-lg font-extralight'>
                             <li><Link to='/'>Home</Link></li>
-                            <li><Link to='/blogs'>Blogs</Link></li>
-                            <li><Link to='/myPortfolio'>My Portfolio</Link></li>
+                            <li><Link to='/'>Spare Parts</Link></li>
+                            <li><Link to='/'>Reviews</Link></li>
+                            <li><Link to='/'>Featured</Link></li>
+                            <li><Link to='/'>About Us</Link></li>
+                            <li><Link to='/'>Services</Link></li>
+                            <li><Link to='/'>Our Team</Link></li>
+                            <li><Link to='/'>Contact</Link></li>
                         </ul>
                         {
                             (user && location.pathname !== '/signup') ? <>
@@ -115,7 +122,7 @@ const Header = () => {
                                 </div>
                             </>
                                 :
-                                <Link to='/login' className='btn btn-secondary btn-md rounded-none text-neutral'>Log In</Link>
+                                <Link to='/login' className='btn btn-secondary btn-md rounded-none text-neutral capitalize'>Log In</Link>
                         }
                     </div>
                 </div>
