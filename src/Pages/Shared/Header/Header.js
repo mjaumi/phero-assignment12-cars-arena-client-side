@@ -42,11 +42,14 @@ const Header = () => {
                             </label>
                             <ul tabIndex='0' className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52'>
                                 <div className='flex flex-col items-center'>
-                                    <li><Link to='/'>Home</Link></li>
-                                    <li><Link to='/'>Spare Parts</Link></li>
-                                    <li><Link to='/'>Reviews</Link></li>
-                                    <li><Link to='/'>About</Link></li>
-                                    <li><Link to='/'>Contact</Link></li>
+                                    <li><HashLink to='/#home' smooth>Home</HashLink></li>
+                                    <li><HashLink to='/#spareParts' smooth>Spare Parts</HashLink></li>
+                                    <li><HashLink to='/#reviews' smooth>Reviews</HashLink></li>
+                                    <li><HashLink to='/#featured' smooth>Featured</HashLink></li>
+                                    <li><HashLink to='/#about' smooth>About Us</HashLink></li>
+                                    <li><HashLink to='/#services' smooth>Services</HashLink></li>
+                                    <li><HashLink to='/#ourTeam' smooth>Our Team</HashLink></li>
+                                    <li><HashLink to='/#contact' smooth>Contact</HashLink></li>
                                     {
                                         (user && !location.pathname === '/signup') ? <>
                                             <div onClick={showMenu} className='btn btn-ghost relative flex items-center normal-case'>
