@@ -10,7 +10,7 @@ const OurTeam = () => {
     return (
         <section className='w-[95%] md:w-4/5 mx-auto py-40'>
             <div>
-                <h2 className='text-3xl md:text-4xl text-neutral font-bold mb-3'>Meet Our Team</h2>
+                <h2 className='text-3xl md:text-4xl text-neutral font-bold mb-3'>Meet With Our Professionals</h2>
                 <p className='text-secondary'>We have the most proactive team in the world to help you out in every situation.</p>
             </div>
             <div className='grid grid-cols-1 md:grid-cols-4 gap-20 mt-16'>
