@@ -11,8 +11,8 @@ const Featured = () => {
         <section id='featured' className='bg-base-200 py-40'>
             <div className='w-[95%] md:w-4/5 mx-auto'>
                 <h2 className='md:text-left text-4xl font-medium text-primary'>Featured Parts</h2>
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-10 mt-16'>
-                    <div className='relative overflow-hidden group cursor-pointer'>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-14 mt-16'>
+                    <div className='relative overflow-hidden group cursor-pointer md:scale-90'>
                         <div>
                             <img src={tires} alt='CEO' />
                         </div>
@@ -25,7 +25,7 @@ const Featured = () => {
 
                         </div>
                     </div>
-                    <div className='relative overflow-hidden group cursor-pointer'>
+                    <div className='relative overflow-hidden group cursor-pointer md:scale-125'>
                         <div>
                             <img src={rims} alt='Marketing Officer' />
                         </div>
@@ -38,7 +38,7 @@ const Featured = () => {
 
                         </div>
                     </div>
-                    <div className='relative overflow-hidden group cursor-pointer'>
+                    <div className='relative overflow-hidden group cursor-pointer md:scale-90'>
                         <div>
                             <img src={headlight} alt='Engineer' />
                         </div>

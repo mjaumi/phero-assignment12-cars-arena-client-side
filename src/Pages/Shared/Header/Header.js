@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { toast } from 'react-toastify';
+import { HashLink } from 'react-router-hash-link';
 
 const Header = () => {
     // integration of react firebase hooks
@@ -82,16 +83,16 @@ const Header = () => {
                         </div>
                         <Link to='/' className='btn btn-ghost normal-case text-lg font-extralight'>Cars <span className='text-3xl font-bold text-primary'>Arena</span></Link>
                     </div>
-                    <div className='navbar-end hidden lg:flex flex-1'>
-                        <ul className='menu menu-horizontal p-0 mr-5 text-neutral text-lg font-extralight'>
-                            <li><a href='#home'>Home</a></li>
-                            <li><a href='#spareParts'>Spare Parts</a></li>
-                            <li><a href='#reviews'>Reviews</a></li>
-                            <li><a href='#featured'>Featured</a></li>
-                            <li><a href='#about'>About Us</a></li>
-                            <li><a href='#services'>Services</a></li>
-                            <li><a href='#ourTeam'>Our Team</a></li>
-                            <li><a href='#contact'>Contact</a></li>
+                    <div className='menu menu-horizontal navbar-end hidden lg:flex flex-1'>
+                        <ul className='flex p-0 mr-5 text-neutral text-lg font-extralight'>
+                            <li><HashLink to='/#home' smooth>Home</HashLink></li>
+                            <li><HashLink to='/#spareParts' smooth>Spare Parts</HashLink></li>
+                            <li><HashLink to='/#reviews' smooth>Reviews</HashLink></li>
+                            <li><HashLink to='/#featured' smooth>Featured</HashLink></li>
+                            <li><HashLink to='/#about' smooth>About Us</HashLink></li>
+                            <li><HashLink to='/#services' smooth>Services</HashLink></li>
+                            <li><HashLink to='/#ourTeam' smooth>Our Team</HashLink></li>
+                            <li><HashLink to='/#contact' smooth>Contact</HashLink></li>
                         </ul>
                         {
                             (user && location.pathname !== '/signup') ? <>
