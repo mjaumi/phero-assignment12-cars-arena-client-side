@@ -10,7 +10,7 @@ const SpareParts = () => {
     // fetching first 6 parts here
     useEffect(() => {
         const getParts = async () => {
-            const { data } = await axios.get('https://shielded-mountain-18545.herokuapp.com/parts');
+            const { data } = await axios.get('https://cars-arena.onrender.com/parts');
             setParts(data);
         }
         getParts();

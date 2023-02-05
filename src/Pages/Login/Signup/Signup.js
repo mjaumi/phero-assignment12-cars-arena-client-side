@@ -49,7 +49,7 @@ const Signup = () => {
                     address: ''
                 }
 
-                await axios.post('https://shielded-mountain-18545.herokuapp.com/user', newUser);
+                await axios.post('https://cars-arena.onrender.com/user', newUser);
 
                 signOut(auth);
                 navigate('/');

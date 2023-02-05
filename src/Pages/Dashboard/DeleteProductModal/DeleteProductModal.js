@@ -14,7 +14,7 @@ const DeleteProductModal = ({ part, refetch, setShowLoading, setShowProductDelet
     // deleting the order here
     const deletePart = async () => {
         setShowLoading(true);
-        const url = `https://shielded-mountain-18545.herokuapp.com/part/${part._id}`;
+        const url = `https://cars-arena.onrender.com/part/${part._id}`;
         const result = await axios.delete(url, {
             method: 'DELETE',
             headers: {

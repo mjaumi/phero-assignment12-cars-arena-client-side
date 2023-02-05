@@ -33,7 +33,7 @@ const Purchase = () => {
     useEffect(() => {
         const getPartById = async () => {
             setShowLoading(true);
-            const url = `https://shielded-mountain-18545.herokuapp.com/parts/${id}`;
+            const url = `https://cars-arena.onrender.com/parts/${id}`;
             const { data } = await axios.get(url);
             setPart(data);
             setOrderQuantity(part.minimumOrderQuantity);
@@ -84,7 +84,7 @@ const Purchase = () => {
             tId: ''
         }
 
-        const { data } = await axios.post(' https://shielded-mountain-18545.herokuapp.com/order', newOrder);
+        const { data } = await axios.post('https://cars-arena.onrender.com/order', newOrder);
 
         if (data.insertedId) {
             toast.success('Placed Order Successfully!!!');

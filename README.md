@@ -46,5 +46,5 @@
 - Nodemon Library.
 - Json Web Token Library.
 - MongoDB For storing data.
-- Heroku For Server Hosting.
+- Render For Server Hosting.
 - Stripe Payment Gateway.

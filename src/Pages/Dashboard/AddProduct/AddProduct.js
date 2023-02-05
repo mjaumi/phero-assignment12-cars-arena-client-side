@@ -59,7 +59,7 @@ const AddProduct = () => {
         }
 
         console.log(newProduct);
-        const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/parts', newProduct, {
+        const result = await axios.post('https://cars-arena.onrender.com/parts', newProduct, {
             method: 'POST',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

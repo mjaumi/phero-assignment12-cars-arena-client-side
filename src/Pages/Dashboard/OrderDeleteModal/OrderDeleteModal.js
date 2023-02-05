@@ -14,7 +14,7 @@ const OrderDeleteModal = ({ order, setShowOrderDeleteModal, setShowLoading, refe
     // deleting the order here
     const deleteOrder = async () => {
         setShowLoading(true);
-        const url = `https://shielded-mountain-18545.herokuapp.com/order/${order._id}`;
+        const url = `https://cars-arena.onrender.com/order/${order._id}`;
         const result = await axios.delete(url, {
             method: 'DELETE',
             headers: {

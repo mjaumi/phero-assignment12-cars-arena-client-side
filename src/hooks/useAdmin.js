@@ -8,7 +8,7 @@ const useAdmin = user => {
     useEffect(() => {
         const checkAdmin = async () => {
             if (user) {
-                const url = `https://shielded-mountain-18545.herokuapp.com/admin/${user.email}`;
+                const url = `https://cars-arena.onrender.com/admin/${user.email}`;
                 const { data } = await axios.get(url);
                 setAdmin(data.admin);
                 setAdminLoading(false);

@@ -12,7 +12,7 @@ const Reviews = () => {
     // getting all the reviews from database
     useEffect(() => {
         const getReviews = async () => {
-            const { data } = await axios.get('https://shielded-mountain-18545.herokuapp.com/reviews');
+            const { data } = await axios.get('https://cars-arena.onrender.com/reviews');
             setReviews(data);
         }
         getReviews();

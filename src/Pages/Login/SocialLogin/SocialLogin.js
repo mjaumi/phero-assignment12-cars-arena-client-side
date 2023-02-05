@@ -36,11 +36,11 @@ const SocialLogin = () => {
                         address: ''
                     }
 
-                    await axios.post('https://shielded-mountain-18545.herokuapp.com/user', newUser);
+                    await axios.post('https://cars-arena.onrender.com/user', newUser);
                 }
 
                 // getting token from API
-                const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/getToken', { email: user.user.email });
+                const result = await axios.post('https://cars-arena.onrender.com/getToken', { email: user.user.email });
                 localStorage.setItem('accessToken', result.data.accessToken);
 
                 toast.success('Log In Successful!!!');

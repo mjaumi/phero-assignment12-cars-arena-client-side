@@ -13,7 +13,7 @@ const ManageAllOrders = () => {
     const [showLoading, setShowLoading] = useState(false);
 
     // integration of react query
-    const url = ` https://shielded-mountain-18545.herokuapp.com/allOrders`;
+    const url = ` https://cars-arena.onrender.com/allOrders`;
     const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => axios.get(url, {
         method: 'GET',
         headers: {

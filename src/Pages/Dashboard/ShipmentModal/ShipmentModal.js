@@ -14,7 +14,7 @@ const ShipmentModal = ({ refetch, selectedOrderId, setShowShipmentModal, setShow
 
     const makeShipment = async () => {
         setShowLoading(true);
-        const url = ` https://shielded-mountain-18545.herokuapp.com/shipOrder/${selectedOrderId}`;
+        const url = `https://cars-arena.onrender.com/shipOrder/${selectedOrderId}`;
         const result = await axios.patch(url, {}, {
             method: 'PATCH',
             headers: {

@@ -9,7 +9,7 @@ const BusinessSummary = () => {
     // fetching the summary data
     useEffect(() => {
         const getSummaryData = async () => {
-            const { data } = await axios.get('https://shielded-mountain-18545.herokuapp.com/summary');
+            const { data } = await axios.get('https://cars-arena.onrender.com/summary');
             setSummary(data);
         }
         getSummaryData();

@@ -36,7 +36,7 @@ const Login = () => {
         await signInWithEmailAndPassword(data.email, data.password);
 
         // getting token from API
-        const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/getToken', { email: data.email });
+        const result = await axios.post('https://cars-arena.onrender.com/getToken', { email: data.email });
         localStorage.setItem('accessToken', result.data.accessToken);
         setToken(result.data.accessToken);
     }

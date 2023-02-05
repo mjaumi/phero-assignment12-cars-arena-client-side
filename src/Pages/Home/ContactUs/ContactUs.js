@@ -26,7 +26,7 @@ const ContactUs = () => {
             query
         }
 
-        const { data } = await axios.post('https://shielded-mountain-18545.herokuapp.com/query', newQuery);
+        const { data } = await axios.post('https://cars-arena.onrender.com/query', newQuery);
 
         if (data.acknowledged) {
             toast.success('Query Submission Successful!!!');

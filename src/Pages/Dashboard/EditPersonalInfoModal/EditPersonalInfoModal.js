@@ -45,7 +45,7 @@ const EditPersonalInfoModal = ({ refetch, user, userInfo, setShowEditInfoModal, 
                 address: data.address ? data.address : userInfo.address
             }
 
-            const infoUpdateUrl = `https://shielded-mountain-18545.herokuapp.com/user?email=${user?.email}`;
+            const infoUpdateUrl = `https://cars-arena.onrender.com/user?email=${user?.email}`;
 
             const result = await axios.patch(infoUpdateUrl, updatedUser, {
                 method: 'PATCH',

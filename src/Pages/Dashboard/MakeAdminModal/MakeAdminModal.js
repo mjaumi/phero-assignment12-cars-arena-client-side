@@ -13,7 +13,7 @@ const MakeAdminModal = ({ refetch, userId, setShowMakeAdminModal, setShowLoading
 
     const handleMakeAdmin = async () => {
         setShowLoading(true);
-        const url = `https://shielded-mountain-18545.herokuapp.com/user/${userId}`;
+        const url = `https://cars-arena.onrender.com/user/${userId}`;
         const result = await axios.patch(url, {}, {
             method: 'PATCH',
             headers: {

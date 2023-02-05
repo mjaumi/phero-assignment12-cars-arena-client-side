@@ -13,11 +13,11 @@ const ManageProducts = () => {
     const [part, setPart] = useState({});
 
     // integration of react query
-    const { data: allParts, isLoading, refetch } = useQuery('allParts', () => axios.get('https://shielded-mountain-18545.herokuapp.com/parts'));
+    const { data: allParts, isLoading, refetch } = useQuery('allParts', () => axios.get('https://cars-arena.onrender.com/parts'));
 
     // getting selected product
     const getSelectedPart = async (id) => {
-        const url = `https://shielded-mountain-18545.herokuapp.com/parts/${id}`;
+        const url = `https://cars-arena.onrender.com/parts/${id}`;
         const { data } = await axios.get(url);
         setPart(data);
     }

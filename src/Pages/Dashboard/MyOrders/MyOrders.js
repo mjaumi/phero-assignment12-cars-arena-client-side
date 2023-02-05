@@ -28,7 +28,7 @@ const MyOrders = () => {
     const navigate = useNavigate();
 
     // integration of react query
-    const url = `https://shielded-mountain-18545.herokuapp.com/orders?email=${user?.email}`;
+    const url = `https://cars-arena.onrender.com/orders?email=${user?.email}`;
     const { data: userOrders, isLoading, refetch, error } = useQuery('userOrders', () => axios.get(url, {
         method: 'GET',
         headers: {
@@ -61,7 +61,7 @@ const MyOrders = () => {
 
     // getting selected order that the user wants to pay
     const getSelectedOrder = async (id) => {
-        const url = `https://shielded-mountain-18545.herokuapp.com/order/${id}`;
+        const url = `https://cars-arena.onrender.com/order/${id}`;
         const result = await axios.get(url, {
             method: 'GET',
             headers: {

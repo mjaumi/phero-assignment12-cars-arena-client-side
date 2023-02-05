@@ -13,7 +13,7 @@ const MakeAdmin = () => {
     const [userId, setUserId] = useState('');
 
     // integration of react query
-    const { data: users, isLoading, refetch } = useQuery('users', () => axios.get('https://shielded-mountain-18545.herokuapp.com/users', {
+    const { data: users, isLoading, refetch } = useQuery('users', () => axios.get('https://cars-arena.onrender.com/users', {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

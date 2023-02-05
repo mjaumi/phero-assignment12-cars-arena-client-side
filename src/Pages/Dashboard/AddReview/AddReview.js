@@ -28,7 +28,7 @@ const AddReview = () => {
                 rating: rating
             }
 
-            const { data } = await axios.post('https://shielded-mountain-18545.herokuapp.com/review', newReview);
+            const { data } = await axios.post('https://cars-arena.onrender.com/review', newReview);
 
             if (data.acknowledged) {
                 toast.success('Review Added Successfully!!!');

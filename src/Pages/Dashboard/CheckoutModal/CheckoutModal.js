@@ -25,7 +25,7 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
     useEffect(() => {
         const getClientSecretKey = async () => {
             if (totalPrice) {
-                const result = await axios.post('https://shielded-mountain-18545.herokuapp.com/create-payment-intent', { price: totalPrice }, {
+                const result = await axios.post('https://cars-arena.onrender.com/create-payment-intent', { price: totalPrice }, {
                     method: 'POST',
                     headers: {
                         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -88,7 +88,7 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
                 const paymentStatus = {
                     tId: paymentIntent.id,
                 }
-                const url = `https://shielded-mountain-18545.herokuapp.com/order/${_id}`;
+                const url = `https://cars-arena.onrender.com/order/${_id}`;
                 const result = await axios.patch(url, paymentStatus, {
                     method: 'PATCH',
                     headers: {
@@ -114,14 +114,14 @@ const CheckoutModal = ({ order, refetch, setShowCheckoutModal }) => {
                             authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         }
                     });
-                    const partsUrl = `https://shielded-mountain-18545.herokuapp.com/parts/${order.data.productId}`
+                    const partsUrl = `https://cars-arena.onrender.com/parts/${order.data.productId}`
                     const parts = await axios.get(partsUrl);
 
                     const newAvailable = {
                         availableQuantity: parts.data.availableQuantity - order.data.orderedQuantity
                     }
 
-                    const updatePartUrl = `https://shielded-mountain-18545.herokuapp.com/updateParts/${parts.data._id}`
+                    const updatePartUrl = `https://cars-arena.onrender.com/updateParts/${parts.data._id}`
                     await axios.patch(updatePartUrl, newAvailable, {
                         method: 'PATCH',
                         headers: {
